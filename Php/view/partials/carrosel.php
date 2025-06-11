@@ -12,10 +12,10 @@
 
         <!-- Slides -->
         <div id="slider" class="flex transition-transform duration-500 ease-in-out">
-            <img src="../imagens/imagem.jpg" class="w-full flex-shrink-0 object-cover" alt="Natureza" />
-            <img src="../imagens/imagem.jpg" class="w-full flex-shrink-0 object-cover" alt="Cidade" />
-            <img src="../imagens/imagem.jpg" class="w-full flex-shrink-0 object-cover" alt="Tecnologia" />
-            <img src="../imagens/imagem.jpg" class="w-full flex-shrink-0 object-cover" alt="Oceano" />
+            <img src="../imagens/banner1.jpg" class="w-full flex-shrink-0 object-cover" alt="Natureza" />
+            <img src="../imagens/banner2.jpg" class="w-full flex-shrink-0 object-cover" alt="Cidade" />
+            <img src="../imagens/banner3.jpg" class="w-full flex-shrink-0 object-cover" alt="Tecnologia" />
+            <img src="../imagens/banner1.jpg" class="w-full flex-shrink-0 object-cover" alt="Oceano" />
         </div>
     </div>
 </div>
