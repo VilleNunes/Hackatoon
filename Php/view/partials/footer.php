@@ -2,17 +2,17 @@
     <footer class="footer max-w-screen-xl m-auto sm:footer-horizontal text-base-content p-10 flex justify-between">
         <nav>
             <h6 class="footer-title font-bold text-white">Links ùteis</h6>
-            <a class="link link-hover text-white">Site Unialfa</a>
-            <a class="link link-hover text-white">Eventos</a>
-             <a class="link link-hover text-white">Sobre á Unialfa</a>
+            <a href="https://www.alfaumuarama.edu.br/fau/" class="link link-hover text-white">Site Unialfa</a>
+            <a href="eventos" class="link link-hover text-white">Eventos</a>
+            <a class="link link-hover text-white">Sobre á Unialfa</a>
             
         </nav>
         <nav>
             <h6 class="footer-title text-white">Cursos</h6>
-            <a class="link link-hover text-white">Administração</a>
-            <a class="link link-hover text-white">Markenting</a>
-            <a class="link link-hover text-white">Pedagogia</a>
-            <a class="link link-hover text-white">Sistemas para Internet</a>
+            <a href="https://www.alfaumuarama.edu.br/fau/graduacao/8142/administracao" class="link link-hover text-white">Administração</a>
+            <a href="https://www.alfaumuarama.edu.br/fau/graduacao/1/marketing" class="link link-hover text-white">Markenting</a>
+            <a href="https://www.alfaumuarama.edu.br/fau/graduacao/8141/pedagogia" class="link link-hover text-white">Pedagogia</a>
+            <a href="https://www.alfaumuarama.edu.br/fau/graduacao/2/sistemas-para-internet" class="link link-hover text-white">Sistemas para Internet</a>
         </nav>
         <nav>
             <h6 class="footer-title text-white">Mídias Sóciais</h6>
