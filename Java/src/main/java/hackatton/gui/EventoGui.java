@@ -120,6 +120,7 @@ public class EventoGui extends JFrame implements GuiUtil {
 
         return jPanel;
     }
+
     private void deletarEvento(ActionEvent e) {
         if (eventoSelecionadoId != null) {
             boolean sucesso = eventoService.deletarEvento(eventoSelecionadoId);
@@ -139,7 +140,7 @@ public class EventoGui extends JFrame implements GuiUtil {
     private void selecionarEvento(ListSelectionEvent event) {
         int selectedRow = tabela.getSelectedRow();
         if (selectedRow != -1) {
-            eventoSelecionadoId = (Long) tabela.getValueAt(selectedRow, 0); // <-- salva o ID
+            eventoSelecionadoId = (Long) tabela.getValueAt(selectedRow, 0);
 
             tfTitulo.setText((String) tabela.getValueAt(selectedRow, 1));
             tfDescricao.setText((String) tabela.getValueAt(selectedRow, 2));
