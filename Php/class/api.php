@@ -22,7 +22,6 @@ class SimpleApiClient
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, strtoupper($method));
 
-        // Cabeçalhos da requisição
         $headers = ['Content-Type: application/json'];
         if ($this->token) {
             $headers[] = 'Authorization: Bearer ' . $this->token;
@@ -33,7 +32,7 @@ class SimpleApiClient
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         }
 
-        // Ignorar SSL (para localhost)
+       
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 

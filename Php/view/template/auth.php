@@ -10,7 +10,7 @@
     <title>UniAlfa</title>
 </head>
 
-<body class="h-screen flex items-center justify-center p-10 bg-blue-400/50">
+<body class="h-screen flex items-center justify-center p-10 bg-blue-950/90">
     <?php
         require  "view/{$view}.php"
     ?>
