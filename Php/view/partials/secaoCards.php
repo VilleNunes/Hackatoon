@@ -1,5 +1,5 @@
 <div class="bg-blue-950 p-5 mb-10">
-    <form class="flex items-center gap-2 max-w-screen-md mx-auto" action="eventos">
+    <form class="flex items-center gap-2 max-w-screen-md mx-auto" action="<?=$controller?>">
         <fieldset class="fieldset flex-1">
             <input type="text" class="input w-full -z-0" name="query" placeholder="Pesquisar" />
         </fieldset>

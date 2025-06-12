@@ -1,5 +1,4 @@
 <?php
-require "./class/api.php";
 
 $api = new SimpleApiClient('http://localhost:3333');
 

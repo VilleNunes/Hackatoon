@@ -1,7 +1,5 @@
 <?php
 
-require "./class/api.php";
-
 $api = new SimpleApiClient('http://localhost:3333');
 
 $response = $api->get("/index");
