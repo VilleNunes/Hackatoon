@@ -1,5 +1,6 @@
 package hackatton.service;
 
+import hackatton.dao.DaoInterface;
 import hackatton.dao.EventoDao;
 import hackatton.model.Evento;
 
@@ -9,9 +10,9 @@ import java.util.List;
 
 public class EventoService {
 
-    public void salvarBD(Evento evento) {
+    public boolean salvarBD(Evento evento) {
         var dao = new EventoDao();
-        dao.salvar(evento);
+        return dao.salvar(evento);
     }
 
     public List<Evento> listarBD() {
@@ -26,6 +27,12 @@ public class EventoService {
         var arquivo = new File(System.getProperty("user.dir"), "\\eventos.txt");
         writerFile(evento.toString(), arquivo.toString());
     }
+
+    public boolean atualizarBD(Evento evento) {
+        DaoInterface eventoDao = null;
+        return eventoDao.atualizar(evento);
+    }
+
 
     public String listar() {
 

@@ -20,17 +20,53 @@ public class EventoDao extends Dao implements DaoInterface {
             ps.setLong(6, evento.getIdCurso());
             ps.setString(7, evento.getLocalizacao());
 
-            return ps.execute();
+            int linhasAfetadas = ps.executeUpdate(); // <- CORRETO AQUI
+            ps.close();
+
+            return linhasAfetadas > 0;
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Erro ao salvar evento:");
+            e.printStackTrace();
             return false;
         }
     }
 
     @Override
     public boolean atualizar(Object entity) {
-        return false;
+        try {
+            Evento evento = (Evento) entity;
+
+            String sqlUpdate = "UPDATE evento SET " +
+                    "titulo = ?, " +
+                    "descricao = ?, " +
+                    "data_inicio = ?, " +
+                    "data_fim = ?, " +
+                    "id_palestrante = ?, " +
+                    "id_curso = ?, " +
+                    "localizacao = ? " +
+                    "WHERE id = ?";
+
+            var ps = getConnection().prepareStatement(sqlUpdate);
+            ps.setString(1, evento.getTitulo());
+            ps.setString(2, evento.getDescricao());
+            ps.setString(3, evento.getDataInicio());
+            ps.setString(4, evento.getDataFim());
+            ps.setLong(5, evento.getIdPalestrante());
+            ps.setLong(6, evento.getIdCurso());
+            ps.setString(7, evento.getLocalizacao());
+            ps.setLong(8, evento.getId()); // importante!
+
+            int linhasAfetadas = ps.executeUpdate();
+            ps.close();
+
+            return linhasAfetadas > 0;
+
+        } catch (Exception e) {
+            System.out.println("Erro ao atualizar evento:");
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
