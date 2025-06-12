@@ -1,4 +1,3 @@
-
 <div class=" bg-gray-300/80 py-">
     <div class="w-full max-w-6xl mx-auto px-4 py-10 relative">
         <h2 class="text-2xl font-bold mb-6">Eventos</h2>
@@ -16,6 +15,7 @@
         <!-- Container do carrossel -->
         <div id="carousel" class="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide px-6">
             <!-- Card 1 -->
+            <?php foreach($eventos as $evento):?>
             <div class="snap-start min-w-[350px] bg-white shadow-md rounded-lg p-4">
                 <img src="logoAlfa.png" class="rounded-md mb-4 h-[200px] object-contain" alt="Card 1">
                 <h3 class="font-semibold text-lg">Titulo</h3>
@@ -23,85 +23,12 @@
                     veritatis fugit architecto sint pariatur quas nostrum delectus sit iste quis. Fuga quibusdam
                     rerum
                     nam delectus repudiandae provident magnam necessitatibus. Molestiae.</p>
-                    <p class="mt-3">Data: 20/30/2024</p>
-                    
-                <button class="btn btn-neutral mt-5">Ver Evento</button>
-            </div>
+                <p class="mt-3">Data: 20/30/2024</p>
 
-            <!-- Card 2 -->
-            <div class="snap-start min-w-[350px] bg-white shadow-md rounded-lg p-4">
-                <img src="logoAlfa.png" class="rounded-md mb-4 h-[200px] object-contain" alt="Card 1">
-                <h3 class="font-semibold text-lg">Titulo</h3>
-                <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-                    veritatis fugit architecto sint pariatur quas nostrum delectus sit iste quis. Fuga quibusdam
-                    rerum
-                    nam delectus repudiandae provident magnam necessitatibus. Molestiae.</p>
-                    <p class="mt-3">Data: 20/30/2024</p>
-                    <p>Localização: Rua 3</p>
-                    
-                <button class="btn btn-neutral mt-5">Ver Evento</button>
+                <button class="btn btn-neutral mt-5">Se Cadastrar</button>
             </div>
-            <div class="snap-start min-w-[350px] bg-white shadow-md rounded-lg p-4">
-                <img src="logoAlfa.png" class="rounded-md mb-4 h-[200px] object-contain" alt="Card 1">
-                <h3 class="font-semibold text-lg">Titulo</h3>
-                <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-                    veritatis fugit architecto sint pariatur quas nostrum delectus sit iste quis. Fuga quibusdam
-                    rerum
-                    nam delectus repudiandae provident magnam necessitatibus. Molestiae.</p>
-                    <p class="mt-3">Data: 20/30/2024</p>
-                    <p>Localização: Rua 3</p>
-                    
-                <button class="btn btn-neutral mt-5">Ver Evento</button>
-            </div>
-            <div class="snap-start min-w-[350px] bg-white shadow-md rounded-lg p-4">
-                <img src="logoAlfa.png" class="rounded-md mb-4 h-[200px] object-contain" alt="Card 1">
-                <h3 class="font-semibold text-lg">Titulo</h3>
-                <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-                    veritatis fugit architecto sint pariatur quas nostrum delectus sit iste quis. Fuga quibusdam
-                    rerum
-                    nam delectus repudiandae provident magnam necessitatibus. Molestiae.</p>
-                    <p class="mt-3">Data: 20/30/2024</p>
-                    <p>Localização: Rua 3</p>
-                    
-                <button class="btn btn-neutral mt-5">Ver Evento</button>
-            </div>
-            <div class="snap-start min-w-[350px] bg-white shadow-md rounded-lg p-4">
-                <img src="logoAlfa.png" class="rounded-md mb-4 h-[200px] object-contain" alt="Card 1">
-                <h3 class="font-semibold text-lg">Titulo</h3>
-                <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-                    veritatis fugit architecto sint pariatur quas nostrum delectus sit iste quis. Fuga quibusdam
-                    rerum
-                    nam delectus repudiandae provident magnam necessitatibus. Molestiae.</p>
-                    <p class="mt-3">Data: 20/30/2024</p>
-                    <p>Localização: Rua 3</p>
-                    
-                <button class="btn btn-neutral mt-5">Ver Evento</button>
-            </div>
-            <div class="snap-start min-w-[350px] bg-white shadow-md rounded-lg p-4">
-                <img src="logoAlfa.png" class="rounded-md mb-4 h-[200px] object-contain" alt="Card 1">
-                <h3 class="font-semibold text-lg">Titulo</h3>
-                <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-                    veritatis fugit architecto sint pariatur quas nostrum delectus sit iste quis. Fuga quibusdam
-                    rerum
-                    nam delectus repudiandae provident magnam necessitatibus. Molestiae.</p>
-                    <p class="mt-3">Data: 20/30/2024</p>
-                    <p>Localização: Rua 3</p>
-                    
-                <button class="btn btn-neutral mt-5">Ver Evento</button>
-            </div>
+            <?php endforeach;?>
 
-            <div class="snap-start min-w-[350px] bg-white shadow-md rounded-lg p-4">
-                <img src="logoAlfa.png" class="rounded-md mb-4 h-[200px] object-contain" alt="Card 1">
-                <h3 class="font-semibold text-lg">Titulo</h3>
-                <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-                    veritatis fugit architecto sint pariatur quas nostrum delectus sit iste quis. Fuga quibusdam
-                    rerum
-                    nam delectus repudiandae provident magnam necessitatibus. Molestiae.</p>
-                    <p class="mt-3">Data: 20/30/2024</p>
-                    <p>Localização: Rua 3</p>
-                    
-                <button class="btn btn-neutral mt-5">Ver Evento</button>
-            </div>
         </div>
     </div>
 </div>
