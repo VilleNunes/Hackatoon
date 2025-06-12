@@ -8,10 +8,9 @@ export function errorHandler(error:any,req: Request, res: Response, next: NextFu
   }
 
   if(error instanceof ZodError){
-    return res.status(500).json({
-      mensagem: "validat error",
-      issue: error.format()
-    })
+    return res.status(500).json(
+    "validat error",
+    )
   }
 
   return res.status(500).json(error.message);
