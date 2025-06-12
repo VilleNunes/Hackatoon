@@ -14,7 +14,7 @@
         <?php foreach($eventos as $evento): ?>
             <div class="snap-start bg-white hover:-translate-y-5 transition duration-500 shadow-md rounded-lg p-4">
                 <img src="logoAlfa.png" class="rounded-md mb-4 h-[200px] object-contain" alt="Card 1">
-                <h3 class="font-semibold text-lg"><?= htmlspecialchars($evento['nome']) ?></h3>
+                <h3 class="font-semibold text-lg"><?= $evento['nome'] ?></h3>
                 <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
                     veritatis fugit architecto sint pariatur quas nostrum delectus sit iste quis. Fuga quibusdam
                     rerum

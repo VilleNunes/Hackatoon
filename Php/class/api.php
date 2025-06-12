@@ -2,10 +2,16 @@
 class SimpleApiClient
 {
     private $baseUrl;
+    private $token = null;
 
     public function __construct($baseUrl)
     {
         $this->baseUrl = rtrim($baseUrl, '/');
+    }
+
+    public function setToken($jwt)
+    {
+        $this->token = $jwt;
     }
 
     private function request($method, $endpoint, $data = null)
@@ -16,25 +22,42 @@ class SimpleApiClient
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, strtoupper($method));
 
-        // Para POST, PUT e DELETE envia dados como JSON
+        // Cabeçalhos da requisição
+        $headers = ['Content-Type: application/json'];
+        if ($this->token) {
+            $headers[] = 'Authorization: Bearer ' . $this->token;
+        }
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
         if (in_array(strtoupper($method), ['POST', 'PUT', 'DELETE']) && $data !== null) {
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-            curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
         }
 
-        // Ignorar SSL para localhost (não use em produção)
+        // Ignorar SSL (para localhost)
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
         $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         if (curl_errno($ch)) {
+            $error = curl_error($ch);
             curl_close($ch);
-            return 'Erro cURL: ' . curl_error($ch);
+            return [
+                'status' => 'error',
+                'message' => 'Erro cURL: ' . $error,
+                'http_code' => $httpCode,
+            ];
         }
 
         curl_close($ch);
-        return json_decode($response, true) ?: $response;
+        $decoded = json_decode($response, true);
+
+        return [
+            'status' => 'success',
+            'http_code' => $httpCode,
+            'data' => $decoded !== null ? $decoded : $response,
+        ];
     }
 
     public function get($endpoint)
