@@ -37,6 +37,8 @@ public class EventoGui extends JFrame implements GuiUtil {
 
     private JButton btSalvar;
     private JButton btListar;
+    private JButton btExcluir;
+
 
     private JTable tabela;
 
@@ -77,6 +79,11 @@ public class EventoGui extends JFrame implements GuiUtil {
         btListar = new JButton("Listar Eventos");
         btListar.addActionListener(this::listarEventos);
 
+        btExcluir = new JButton("Excluir");
+        btExcluir.addActionListener(this::deletarEvento);
+
+
+
         jPanel.add(jlTitulo, montarGrid(0, 1));
         jPanel.add(tfTitulo, montarGrid(1, 1));
         jPanel.add(jlDescricao, montarGrid(0, 2));
@@ -93,6 +100,7 @@ public class EventoGui extends JFrame implements GuiUtil {
         jPanel.add(tfLocalizacao, montarGrid(1, 7));
         jPanel.add(btSalvar, montarGrid(0, 8));
         jPanel.add(btListar, montarGrid(1, 8));
+        jPanel.add(btExcluir, montarGrid(2, 8));
 
         return jPanel;
     }
@@ -112,6 +120,21 @@ public class EventoGui extends JFrame implements GuiUtil {
 
         return jPanel;
     }
+    private void deletarEvento(ActionEvent e) {
+        if (eventoSelecionadoId != null) {
+            boolean sucesso = eventoService.deletarEvento(eventoSelecionadoId);
+            if (sucesso) {
+                JOptionPane.showMessageDialog(this, "Evento excluído com sucesso!");
+                limparCampos();
+                tabela.setModel(carregarEventos());
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao excluir evento.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um evento na tabela para excluir.");
+        }
+    }
+
 
     private void selecionarEvento(ListSelectionEvent event) {
         int selectedRow = tabela.getSelectedRow();

@@ -109,7 +109,16 @@ public class EventoDao extends Dao implements DaoInterface {
     }
 
     @Override
-    public boolean deletar(Long id) {
-        return false;
+    public boolean deletarEvento(Long id) {
+        try {
+            String sqlDelete = "DELETE FROM evento WHERE id=?";
+            var ps = getConnection().prepareStatement(sqlDelete);
+            ps.setLong(1, id);
+            ps.execute();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 }
