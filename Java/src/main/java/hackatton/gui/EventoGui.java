@@ -38,6 +38,8 @@ public class EventoGui extends JFrame implements GuiUtil {
     private JButton btSalvar;
     private JButton btListar;
     private JButton btExcluir;
+    private JButton btEditar;
+
 
 
     private JTable tabela;
@@ -82,6 +84,9 @@ public class EventoGui extends JFrame implements GuiUtil {
         btExcluir = new JButton("Excluir");
         btExcluir.addActionListener(this::deletarEvento);
 
+        btEditar = new JButton("Editar");
+        btEditar.addActionListener(this::editarEvento);
+
 
 
         jPanel.add(jlTitulo, montarGrid(0, 1));
@@ -101,6 +106,7 @@ public class EventoGui extends JFrame implements GuiUtil {
         jPanel.add(btSalvar, montarGrid(0, 8));
         jPanel.add(btListar, montarGrid(1, 8));
         jPanel.add(btExcluir, montarGrid(2, 8));
+        jPanel.add(btEditar, montarGrid(3, 8));
 
         return jPanel;
     }
@@ -133,6 +139,33 @@ public class EventoGui extends JFrame implements GuiUtil {
             }
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um evento na tabela para excluir.");
+        }
+    }
+    private void editarEvento(ActionEvent e) {
+        if (eventoSelecionadoId == null) {
+            JOptionPane.showMessageDialog(this, "Selecione um evento na tabela para editar.");
+            return;
+        }
+
+        Evento evento = new Evento(
+                eventoSelecionadoId,
+                tfTitulo.getText(),
+                tfDescricao.getText(),
+                tfDataInicio.getText(),
+                tfDataFim.getText(),
+                Long.valueOf(tfIdPalestrante.getText()),
+                Long.valueOf(tfIdCurso.getText()),
+                tfLocalizacao.getText()
+        );
+
+        boolean sucesso = eventoService.atualizarBD(evento);
+
+        if (sucesso) {
+            limparCampos();
+            JOptionPane.showMessageDialog(this, "Evento editado com sucesso!");
+            tabela.setModel(carregarEventos());
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro ao editar evento.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 

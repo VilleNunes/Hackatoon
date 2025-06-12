@@ -29,15 +29,18 @@ public class EventoService {
     }
 
     public boolean atualizarBD(Evento evento) {
-        DaoInterface eventoDao = null;
-        return eventoDao.atualizar(evento);
+        var dao = new EventoDao();
+        return dao.atualizar(evento);
     }
+
 
     public Boolean deletarEvento(Long id) {
         if (id == null) return false;
         var dao = new EventoDao();
         return dao.deletar(id);
     }
+
+
 
 
     public String listar() {
