@@ -3,20 +3,21 @@ export default {
   connection: {
     host: "localhost",
     user: "root",
-    password:"", 
-    database: "eventos", 
+    password: "",
+    database: "eventos",
     port: 3306,
   },
   pool: {
     min: 2,
     max: 10,
   },
-  migrations: {
+  useNullAsDefault: true,
+  migrations:{
     directory: "./src/database/migrations",
-    extension: "ts", 
+    extencions: "ts"
   },
-  seeds: {
+  seeds:{
     directory: "./src/database/seeds",
-    extension: "ts",
-  },
-};
+    extencions: "ts"
+  }
+}

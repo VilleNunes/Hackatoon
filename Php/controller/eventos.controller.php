@@ -4,7 +4,7 @@ $api = new SimpleApiClient('http://localhost:3333');
 
 $nome = isset($_GET['query']) ? $_GET['query'] : null;
 
-$endpoint = '/index';
+$endpoint = '/eventos';
 if ($nome) {
     $endpoint .= '?nome='. $nome;
 }
