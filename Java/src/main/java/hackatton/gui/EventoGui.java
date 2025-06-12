@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 public class EventoGui extends JFrame implements GuiUtil {
 
     private final EventoService eventoService;
+    private Long eventoSelecionadoId = null;
 
     private JLabel jlTitulo;
     private JTextField tfTitulo;
@@ -115,24 +116,15 @@ public class EventoGui extends JFrame implements GuiUtil {
     private void selecionarEvento(ListSelectionEvent event) {
         int selectedRow = tabela.getSelectedRow();
         if (selectedRow != -1) {
-            var id = (Long) tabela.getValueAt(selectedRow, 0);
-            var titulo = (String) tabela.getValueAt(selectedRow, 1);
-            var descricao = (String) tabela.getValueAt(selectedRow, 2);
-            var dataInicio = (String) tabela.getValueAt(selectedRow, 3);
-            var dataFim = (String) tabela.getValueAt(selectedRow, 4);
-            var idPalestrante = (Long) tabela.getValueAt(selectedRow, 5);
-            var idCurso = (Long) tabela.getValueAt(selectedRow, 6);
-            var localizacao = (String) tabela.getValueAt(selectedRow, 7);
+            eventoSelecionadoId = (Long) tabela.getValueAt(selectedRow, 0); // <-- salva o ID
 
-            limparCampos();
-
-            tfTitulo.setText(titulo);
-            tfDescricao.setText(descricao);
-            tfDataInicio.setText(dataInicio);
-            tfDataFim.setText(dataFim);
-            tfIdPalestrante.setText(idPalestrante.toString());
-            tfIdCurso.setText(idCurso.toString());
-            tfLocalizacao.setText(localizacao);
+            tfTitulo.setText((String) tabela.getValueAt(selectedRow, 1));
+            tfDescricao.setText((String) tabela.getValueAt(selectedRow, 2));
+            tfDataInicio.setText((String) tabela.getValueAt(selectedRow, 3));
+            tfDataFim.setText((String) tabela.getValueAt(selectedRow, 4));
+            tfIdPalestrante.setText(tabela.getValueAt(selectedRow, 5).toString());
+            tfIdCurso.setText(tabela.getValueAt(selectedRow, 6).toString());
+            tfLocalizacao.setText((String) tabela.getValueAt(selectedRow, 7));
         }
     }
 
@@ -168,8 +160,8 @@ public class EventoGui extends JFrame implements GuiUtil {
     }
 
     private void salvarEvento(ActionEvent e) {
-        var evento = new Evento(
-                null,
+        Evento evento = new Evento(
+                eventoSelecionadoId,
                 tfTitulo.getText(),
                 tfDescricao.getText(),
                 tfDataInicio.getText(),
@@ -179,13 +171,25 @@ public class EventoGui extends JFrame implements GuiUtil {
                 tfLocalizacao.getText()
         );
 
-        eventoService.salvarBD(evento);
-        limparCampos();
-        JOptionPane.showMessageDialog(this, "Evento salvo com sucesso!");
-        tabela.setModel(carregarEventos());
+        boolean sucesso;
+
+        if (eventoSelecionadoId == null) {
+            sucesso = eventoService.salvarBD(evento); // novo
+        } else {
+            sucesso = eventoService.atualizarBD(evento); // edição
+        }
+
+        if (sucesso) {
+            limparCampos();
+            JOptionPane.showMessageDialog(this, "Evento salvo com sucesso!");
+            tabela.setModel(carregarEventos());
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar evento.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void limparCampos() {
+        eventoSelecionadoId = null;
         tfTitulo.setText("");
         tfDescricao.setText("");
         tfDataInicio.setText("");
@@ -194,4 +198,5 @@ public class EventoGui extends JFrame implements GuiUtil {
         tfIdCurso.setText("");
         tfLocalizacao.setText("");
     }
+
 }
