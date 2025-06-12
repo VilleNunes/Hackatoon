@@ -4,7 +4,6 @@ import hackatton.dao.DaoInterface;
 import hackatton.dao.EventoDao;
 import hackatton.model.Evento;
 
-import java.awt.event.ActionEvent;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +36,7 @@ public class EventoService {
     public Boolean deletarEvento(Long id) {
         if (id == null) return false;
         var dao = new EventoDao();
-        return dao.deletarEvento(id);
+        return dao.deletar(id);
     }
 
 
