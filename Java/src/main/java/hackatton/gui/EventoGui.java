@@ -1,6 +1,5 @@
 package hackatton.gui;
 
-
 import hackatton.model.Evento;
 import hackatton.service.EventoService;
 
@@ -14,12 +13,14 @@ public class EventoGui extends JFrame implements GuiUtil {
 
     private final EventoService eventoService;
 
-
     private JLabel jlTitulo;
     private JTextField tfTitulo;
 
     private JLabel jlDescricao;
     private JTextField tfDescricao;
+
+    private JLabel jlLocalizacao;
+    private JTextField tfLocalizacao;
 
     private JLabel jlDataInicio;
     private JTextField tfDataInicio;
@@ -42,7 +43,7 @@ public class EventoGui extends JFrame implements GuiUtil {
         this.eventoService = eventoService;
 
         setTitle("Cadastro de Evento");
-        setSize(600, 450);
+        setSize(700, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         getContentPane().add(montarPainelEntrada(), BorderLayout.NORTH);
@@ -53,6 +54,7 @@ public class EventoGui extends JFrame implements GuiUtil {
 
     private JPanel montarPainelEntrada() {
         var jPanel = new JPanel(new GridBagLayout());
+
         jlTitulo = new JLabel("Título:");
         tfTitulo = new JTextField(20);
         jlDescricao = new JLabel("Descrição:");
@@ -65,13 +67,14 @@ public class EventoGui extends JFrame implements GuiUtil {
         tfIdPalestrante = new JTextField(20);
         jlIdCurso = new JLabel("ID Curso:");
         tfIdCurso = new JTextField(20);
+        jlLocalizacao = new JLabel("Localização:");
+        tfLocalizacao = new JTextField(20);
 
         btSalvar = new JButton("Salvar");
         btSalvar.addActionListener(this::salvarEvento);
 
         btListar = new JButton("Listar Eventos");
         btListar.addActionListener(this::listarEventos);
-
 
         jPanel.add(jlTitulo, montarGrid(0, 1));
         jPanel.add(tfTitulo, montarGrid(1, 1));
@@ -85,8 +88,10 @@ public class EventoGui extends JFrame implements GuiUtil {
         jPanel.add(tfIdPalestrante, montarGrid(1, 5));
         jPanel.add(jlIdCurso, montarGrid(0, 6));
         jPanel.add(tfIdCurso, montarGrid(1, 6));
-        jPanel.add(btSalvar, montarGrid(0, 7));
-        jPanel.add(btListar, montarGrid(1, 7));
+        jPanel.add(jlLocalizacao, montarGrid(0, 7));
+        jPanel.add(tfLocalizacao, montarGrid(1, 7));
+        jPanel.add(btSalvar, montarGrid(0, 8));
+        jPanel.add(btListar, montarGrid(1, 8));
 
         return jPanel;
     }
@@ -117,9 +122,9 @@ public class EventoGui extends JFrame implements GuiUtil {
             var dataFim = (String) tabela.getValueAt(selectedRow, 4);
             var idPalestrante = (Long) tabela.getValueAt(selectedRow, 5);
             var idCurso = (Long) tabela.getValueAt(selectedRow, 6);
+            var localizacao = (String) tabela.getValueAt(selectedRow, 7);
 
             limparCampos();
-
 
             tfTitulo.setText(titulo);
             tfDescricao.setText(descricao);
@@ -127,6 +132,7 @@ public class EventoGui extends JFrame implements GuiUtil {
             tfDataFim.setText(dataFim);
             tfIdPalestrante.setText(idPalestrante.toString());
             tfIdCurso.setText(idCurso.toString());
+            tfLocalizacao.setText(localizacao);
         }
     }
 
@@ -139,6 +145,7 @@ public class EventoGui extends JFrame implements GuiUtil {
         model.addColumn("Data Fim");
         model.addColumn("ID Palestrante");
         model.addColumn("ID Curso");
+        model.addColumn("Localização");
 
         eventoService.listarBD().forEach(evento -> {
             model.addRow(new Object[]{
@@ -148,7 +155,8 @@ public class EventoGui extends JFrame implements GuiUtil {
                     evento.getDataInicio(),
                     evento.getDataFim(),
                     evento.getIdPalestrante(),
-                    evento.getIdCurso()
+                    evento.getIdCurso(),
+                    evento.getLocalizacao()
             });
         });
 
@@ -160,8 +168,6 @@ public class EventoGui extends JFrame implements GuiUtil {
     }
 
     private void salvarEvento(ActionEvent e) {
-
-
         var evento = new Evento(
                 null,
                 tfTitulo.getText(),
@@ -169,7 +175,8 @@ public class EventoGui extends JFrame implements GuiUtil {
                 tfDataInicio.getText(),
                 tfDataFim.getText(),
                 Long.valueOf(tfIdPalestrante.getText()),
-                Long.valueOf(tfIdCurso.getText())
+                Long.valueOf(tfIdCurso.getText()),
+                tfLocalizacao.getText()
         );
 
         eventoService.salvarBD(evento);
@@ -185,5 +192,6 @@ public class EventoGui extends JFrame implements GuiUtil {
         tfDataFim.setText("");
         tfIdPalestrante.setText("");
         tfIdCurso.setText("");
+        tfLocalizacao.setText("");
     }
 }

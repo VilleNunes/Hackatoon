@@ -9,7 +9,7 @@ public class EventoDao extends Dao implements DaoInterface {
         try {
             var evento = (Evento) entity;
 
-            String sqlInsert = "insert into evento(titulo, descricao, data_inicio, data_fim, id_palestrante, id_curso) values(?,?,?,?,?,?)";
+            String sqlInsert = "insert into evento(titulo, descricao, data_inicio, data_fim, id_palestrante, id_curso, localizacao) values(?,?,?,?,?,?,?)";
 
             var ps = getConnection().prepareStatement(sqlInsert);
             ps.setString(1, evento.getTitulo());
@@ -18,6 +18,7 @@ public class EventoDao extends Dao implements DaoInterface {
             ps.setString(4, evento.getDataFim());
             ps.setLong(5, evento.getIdPalestrante());
             ps.setLong(6, evento.getIdCurso());
+            ps.setString(7, evento.getLocalizacao());
 
             return ps.execute();
 
@@ -49,7 +50,8 @@ public class EventoDao extends Dao implements DaoInterface {
                         resultSet.getString("data_inicio"),
                         resultSet.getString("data_fim"),
                         resultSet.getLong("id_palestrante"),
-                        resultSet.getLong("id_curso")
+                        resultSet.getLong("id_curso"),
+                        resultSet.getString("localizacao")
                 );
                 eventos.add(evento);
             }

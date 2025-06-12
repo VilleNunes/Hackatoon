@@ -9,11 +9,12 @@ public class Evento {
     private String dataFim;
     private Long idPalestrante;
     private Long idCurso;
+    private String localizacao;
 
     public Evento() {}
 
     public Evento(Long id, String titulo, String descricao, String dataInicio, String dataFim,
-                  Long idPalestrante, Long idCurso) {
+                  Long idPalestrante, Long idCurso, String localizacao) {
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
@@ -21,6 +22,15 @@ public class Evento {
         this.dataFim = dataFim;
         this.idPalestrante = idPalestrante;
         this.idCurso = idCurso;
+        this.localizacao = localizacao;
+    }
+
+    public String getLocalizacao() {
+        return localizacao;
+    }
+
+    public void setLocalizacao(String localizacao) {
+        this.localizacao = localizacao;
     }
 
     public Long getId() {
@@ -89,6 +99,7 @@ public class Evento {
                 ", dataFim='" + dataFim + '\'' +
                 ", idPalestrante=" + idPalestrante +
                 ", idCurso=" + idCurso +
+                ", localização=" + localizacao +
                 '}';
     }
 }
