@@ -104,7 +104,4 @@ public class PalestranteGui extends JFrame {
         tabela.setModel(new javax.swing.table.DefaultTableModel(dados, colunas));
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(PalestranteGui::new);
-    }
 }
