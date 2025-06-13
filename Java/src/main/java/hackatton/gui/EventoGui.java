@@ -40,6 +40,10 @@ public class EventoGui extends JFrame implements GuiUtil {
     private JButton btExcluir;
     private JButton btEditar;
 
+    private JLabel jlImagem;
+    private JTextField tfImagemPath;
+    private JButton btSelecionarImagem;
+
 
 
     private JTable tabela;
@@ -55,6 +59,30 @@ public class EventoGui extends JFrame implements GuiUtil {
         getContentPane().add(montarPainelSaida(), BorderLayout.CENTER);
 
         setLocationRelativeTo(null);
+    }
+
+    private void selecionarImagem(ActionEvent e) {
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showOpenDialog(this);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            var fileSelecionado = fileChooser.getSelectedFile();
+            String nomeArquivo = System.currentTimeMillis() + "_" + fileSelecionado.getName();
+            String destino = "imagens/" + nomeArquivo;
+
+            try {
+                java.nio.file.Files.createDirectories(java.nio.file.Paths.get("imagens"));
+                java.nio.file.Files.copy(
+                        fileSelecionado.toPath(),
+                        java.nio.file.Paths.get(destino),
+                        java.nio.file.StandardCopyOption.REPLACE_EXISTING
+                );
+                tfImagemPath.setText(nomeArquivo); // só o nome, não o caminho completo
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Erro ao salvar imagem.");
+            }
+        }
     }
 
     private JPanel montarPainelEntrada() {
@@ -108,6 +136,17 @@ public class EventoGui extends JFrame implements GuiUtil {
         jPanel.add(btExcluir, montarGrid(2, 8));
         jPanel.add(btEditar, montarGrid(3, 8));
 
+        jlImagem = new JLabel("Imagem:");
+        tfImagemPath = new JTextField(20);
+        tfImagemPath.setEditable(false);
+
+        btSelecionarImagem = new JButton("Selecionar Imagem");
+        btSelecionarImagem.addActionListener(this::selecionarImagem);
+
+        jPanel.add(jlImagem, montarGrid(0, 9));
+        jPanel.add(tfImagemPath, montarGrid(1, 9));
+        jPanel.add(btSelecionarImagem, montarGrid(2, 9));
+
         return jPanel;
     }
 
@@ -155,7 +194,8 @@ public class EventoGui extends JFrame implements GuiUtil {
                 tfDataFim.getText(),
                 Long.valueOf(tfIdPalestrante.getText()),
                 Long.valueOf(tfIdCurso.getText()),
-                tfLocalizacao.getText()
+                tfLocalizacao.getText(),
+                tfImagemPath.getText()
         );
 
         boolean sucesso = eventoService.atualizarBD(evento);
@@ -225,8 +265,11 @@ public class EventoGui extends JFrame implements GuiUtil {
                 tfDataFim.getText(),
                 Long.valueOf(tfIdPalestrante.getText()),
                 Long.valueOf(tfIdCurso.getText()),
-                tfLocalizacao.getText()
+                tfLocalizacao.getText(),
+                tfImagemPath.getText()
         );
+
+        evento.setNomeImagem(tfImagemPath.getText());
 
         boolean sucesso;
 

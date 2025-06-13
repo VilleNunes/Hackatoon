@@ -10,11 +10,12 @@ public class Evento {
     private Long idPalestrante;
     private Long idCurso;
     private String localizacao;
+    private String imagem; // <- Novo campo adicionado
 
     public Evento() {}
 
     public Evento(Long id, String titulo, String descricao, String dataInicio, String dataFim,
-                  Long idPalestrante, Long idCurso, String localizacao) {
+                  Long idPalestrante, Long idCurso, String localizacao, String imagem) {
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
@@ -23,7 +24,22 @@ public class Evento {
         this.idPalestrante = idPalestrante;
         this.idCurso = idCurso;
         this.localizacao = localizacao;
+        this.imagem = imagem;
     }
+
+    public Evento(long id, String titulo, String descricao, String dataInicio, String dataFim, long idPalestrante, long idCurso, String localizacao, Object o, String imagem) {
+    }
+
+    // Getter e Setter para imagem
+    public String getNomeImagem() {
+        return imagem;
+    }
+
+    public void setNomeImagem(String imagem) {
+        this.imagem = imagem;
+    }
+
+    // Getters e Setters existentes...
 
     public String getLocalizacao() {
         return localizacao;
@@ -99,7 +115,9 @@ public class Evento {
                 ", dataFim='" + dataFim + '\'' +
                 ", idPalestrante=" + idPalestrante +
                 ", idCurso=" + idCurso +
-                ", localização=" + localizacao +
+                ", localizacao='" + localizacao + '\'' +
+                ", imagem='" + imagem + '\'' +
                 '}';
     }
+
 }
