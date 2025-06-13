@@ -120,11 +120,6 @@ public class EventoDao extends Dao implements DaoInterface {
         return evento;
     }
 
-    @Override
-    public boolean deletarEvento(Long id) {
-        return false;
-    }
-
     public boolean deletar(Long id) {
         try {
             String sqlDelete = "DELETE FROM evento WHERE id = ?";

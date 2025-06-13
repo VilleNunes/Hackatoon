@@ -23,11 +23,6 @@ public class EventoService {
         return eventos;
     }
 
-    public void salvar(Evento evento) {
-        var arquivo = new File(System.getProperty("user.dir"), "\\eventos.txt");
-        writerFile(evento.toString(), arquivo.toString());
-    }
-
     public boolean atualizarBD(Evento evento) {
         var dao = new EventoDao();
         return dao.atualizar(evento);

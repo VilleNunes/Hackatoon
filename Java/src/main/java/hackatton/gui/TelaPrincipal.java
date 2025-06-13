@@ -1,5 +1,6 @@
 package hackatton.gui;
 
+import hackatton.service.CursoService;
 import hackatton.service.EventoService;
 
 import javax.swing.*;
@@ -67,17 +68,21 @@ public class TelaPrincipal extends JFrame implements GuiUtil {
         var miEvento = new JMenuItem("Eventos");
         var miPalestrante = new JMenuItem("Palestrantes");
         var miAluno = new JMenuItem("Alunos");
+        var miCurso = new JMenuItem("Cursos");
 
         menuCad.add(miEvento);
         menuCad.add(miPalestrante);
         menuCad.add(miAluno);
+        menuCad.add(miCurso);
 
         menuCad.setFont(new Font("Arial", Font.PLAIN, 16));
         miEvento.setFont(new Font("Arial", Font.PLAIN, 14));
         miPalestrante.setFont(new Font("Arial", Font.PLAIN, 14));
         miAluno.setFont(new Font("Arial", Font.PLAIN, 14));
+        miCurso.setFont(new Font("Arial", Font.PLAIN, 14));
 
         miEvento.addActionListener(this::abrirEventoGui);
+        miCurso.addActionListener(this::abrirCursoGui);
 
         return menuCad;
     }
@@ -116,6 +121,11 @@ public class TelaPrincipal extends JFrame implements GuiUtil {
 
     private void abrirEventoGui(ActionEvent actionEvent) {
         var gui = new EventoGui(new EventoService());
+        gui.setVisible(true);
+    }
+
+    private void abrirCursoGui(ActionEvent actionEvent) {
+        var gui = new CursoGui(new CursoService());
         gui.setVisible(true);
     }
 }

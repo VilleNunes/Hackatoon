@@ -12,5 +12,5 @@ public interface DaoInterface {
 
     Object buscarPorId(Long id);
 
-    boolean deletarEvento(Long id);
+    boolean deletar(Long id);
 }
