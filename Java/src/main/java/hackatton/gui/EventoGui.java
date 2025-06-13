@@ -1,6 +1,5 @@
 package hackatton.gui;
 
-import hackatton.dao.PalestranteDao;
 import hackatton.model.Curso;
 import hackatton.model.Evento;
 import hackatton.model.Palestrante;
@@ -130,24 +129,24 @@ public class EventoGui extends JFrame implements GuiUtil {
         btEditar = new JButton("Editar");
         btEditar.addActionListener(this::editarEvento);
 
-        jPanel.add(jlTitulo, montarGrid(0, 1));
-        jPanel.add(tfTitulo, montarGrid(1, 1));
-        jPanel.add(jlDescricao, montarGrid(0, 2));
-        jPanel.add(tfDescricao, montarGrid(1, 2));
-        jPanel.add(jlDataInicio, montarGrid(0, 3));
-        jPanel.add(tfDataInicio, montarGrid(1, 3));
-        jPanel.add(jlDataFim, montarGrid(0, 4));
-        jPanel.add(tfDataFim, montarGrid(1, 4));
-        jPanel.add(jlIdPalestrante, montarGrid(0, 5));
-        jPanel.add(cbPalestrante, montarGrid(1, 5));
-        jPanel.add(jlIdCurso, montarGrid(0, 6));
-        jPanel.add(cbCurso, montarGrid(1, 6));
-        jPanel.add(jlLocalizacao, montarGrid(0, 7));
-        jPanel.add(tfLocalizacao, montarGrid(1, 7));
-        jPanel.add(btSalvar, montarGrid(0, 8));
-        jPanel.add(btListar, montarGrid(1, 8));
-        jPanel.add(btExcluir, montarGrid(2, 8));
-        jPanel.add(btEditar, montarGrid(3, 8));
+        jPanel.add(jlTitulo, montarGrid(0, 1, 3, 1));
+        jPanel.add(tfTitulo, montarGrid(1, 1, 3, 1));
+        jPanel.add(jlDescricao, montarGrid(0, 2, 3, 1));
+        jPanel.add(tfDescricao, montarGrid(1, 2, 3, 1));
+        jPanel.add(jlDataInicio, montarGrid(0, 3, 3, 1));
+        jPanel.add(tfDataInicio, montarGrid(1, 3, 3, 1));
+        jPanel.add(jlDataFim, montarGrid(0, 4, 3, 1));
+        jPanel.add(tfDataFim, montarGrid(1, 4, 3, 1));
+        jPanel.add(jlIdPalestrante, montarGrid(0, 5, 3, 1));
+        jPanel.add(cbPalestrante, montarGrid(1, 5, 3, 1));
+        jPanel.add(jlIdCurso, montarGrid(0, 6, 3, 1));
+        jPanel.add(cbCurso, montarGrid(1, 6, 3, 1));
+        jPanel.add(jlLocalizacao, montarGrid(0, 7, 3, 1));
+        jPanel.add(tfLocalizacao, montarGrid(1, 7, 3, 1));
+        jPanel.add(btSalvar, montarGrid(0, 8, 3, 1));
+        jPanel.add(btListar, montarGrid(1, 8, 3, 1));
+        jPanel.add(btExcluir, montarGrid(2, 8, 3, 1));
+        jPanel.add(btEditar, montarGrid(3, 8, 3, 1));
 
         jlImagem = new JLabel("Imagem:");
         tfImagemPath = new JTextField(20);
@@ -156,9 +155,9 @@ public class EventoGui extends JFrame implements GuiUtil {
         btSelecionarImagem = new JButton("Selecionar Imagem");
         btSelecionarImagem.addActionListener(this::selecionarImagem);
 
-        jPanel.add(jlImagem, montarGrid(0, 9));
-        jPanel.add(tfImagemPath, montarGrid(1, 9));
-        jPanel.add(btSelecionarImagem, montarGrid(2, 9));
+        jPanel.add(jlImagem, montarGrid(0, 9, 3, 1));
+        jPanel.add(tfImagemPath, montarGrid(1, 9, 3, 1));
+        jPanel.add(btSelecionarImagem, montarGrid(2, 9, 3, 1));
 
         return jPanel;
     }
