@@ -88,8 +88,6 @@ public class CursoGui extends JFrame implements GuiUtil {
         }
     }
 
-
-
     private void salvarCurso(ActionEvent e) {
         var curso = new Curso(
                 cursoSelecionadoId,
@@ -161,8 +159,7 @@ public class CursoGui extends JFrame implements GuiUtil {
     }
 
 
-
-        private void limparCampos() {
+    private void limparCampos() {
         cursoSelecionadoId = null;
         tfNome.setText("");
     }
