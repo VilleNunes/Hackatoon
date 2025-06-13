@@ -7,10 +7,10 @@
         </svg>
     </button>
 
-    <div class="text-lg font-semibold" id="user-name">Olá, Usuário</div>
-    <button id="logout-btn" class="font-bold">
+    <div class="text-lg font-semibold" >Olá, <?=auth()['nome']?></div>
+    <a href="/logout" id="logout-btn" class="font-bold">
         Logout
-    </button>
+    </a href="/logout">
 </header>
 
 <script>

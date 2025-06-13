@@ -21,7 +21,10 @@
                     nam delectus repudiandae provident magnam necessitatibus. Molestiae.</p>
                 <p>Data: 20/30/2024</p>
                 <p>Localização: Rua 2</p>
-                <button class="btn btn-neutral mt-5">Se Cadastrar</button>
+                <form action="inscrever" method="post">
+                    <input name="id_evento" value="<?=$evento["id"]?>" type="hidden">
+                    <button type="submit" class="btn btn-neutral mt-5">Se Cadastrar</button>
+                </form>
             </div>
         <?php endforeach; ?>
     <?php else: ?>

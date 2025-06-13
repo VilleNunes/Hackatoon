@@ -19,7 +19,11 @@
 
         
         <div>
-            <a href="login" class="text-blue-600 font-medium hover:underline">Login</a>
+            <?php if(auth()):?>
+                <a href="dashboard" class="text-blue-600 font-medium hover:underline">Painel</a>
+            <?php else:?>
+                <a href="login" class="text-blue-600 font-medium hover:underline">Login</a>
+            <?php endif;?>
         </div>
     </header>
 </div>

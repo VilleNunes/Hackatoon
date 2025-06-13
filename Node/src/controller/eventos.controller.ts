@@ -42,11 +42,14 @@ export class EventsController {
 
     async eventoNotValidad(req: Request, res: Response, next: NextFunction) {
         try {
+            const { nome } = req.query;
+
             const eventosDisponiveis = await knex("eventos")
             .whereNotIn("id", function() {
                 this.select("evento_id")
                 .from("inscricao")
-                .where("user_id", req.user?.id_user);
+                .where("user_id", req.user?.id_user)
+                .where("nome", "like", `%${nome}%`);
             })
             .select("*");
 

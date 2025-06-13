@@ -21,6 +21,7 @@
 </head>
 
 <body class="bg-gray-200/80">
+    <?php require "view/partials/notificacao.php" ?>
     <?php require "view/partials/header.php" ?>
     <?php require "view/partials/carrosel.php" ?>
      <?php

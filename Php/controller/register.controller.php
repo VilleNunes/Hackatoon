@@ -1,4 +1,9 @@
 <?php
+  if(auth()){
+    header("Location: index");
+    die();
+  }
+
   if($_SERVER["REQUEST_METHOD"] == "POST"){
     $nome = $_POST["nome"];
     $email = $_POST["email"];
@@ -28,9 +33,10 @@
       die();
     }
 
-    var_dump($response["data"]["token"]);
+    $_SESSION["token"] = $response["data"]["token"];
+    $_SESSION["auth"] = $response["data"]["user"];
+    header("Location: dashboard");
     die();
-  
   }
   
 view("register","auth");

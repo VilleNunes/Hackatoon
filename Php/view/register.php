@@ -1,3 +1,4 @@
+
 <div class="flex items-center bg-white justify-between"> 
     <form class="w-[400px] mx-auto flex flex-col p-10 shadow-black/50 shadow-2xl" method="post" action="register">
         <img class="w-[230px] mx-auto mb-5" src="../../imagens/logoAlfa.png" alt="">

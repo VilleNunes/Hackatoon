@@ -9,4 +9,20 @@
         return new Flash;
     }
 
+    function auth(){
+        if(!isset($_SESSION['auth'])){
+            return false;
+        }
+
+     return $_SESSION['auth'];
+    }
+
+    function token(){
+        if(!isset($_SESSION['token'])){
+            return false;
+        }
+
+     return $_SESSION['token'];
+    }
+
 ?>

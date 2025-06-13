@@ -12,9 +12,8 @@
             ❯
         </button>
 
-        <!-- Container do carrossel -->
         <div id="carousel" class="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide px-6">
-            <!-- Card 1 -->
+           
             <?php foreach($eventos as $evento):?>
             <div class="snap-start min-w-[350px] bg-white shadow-md rounded-lg p-4">
                 <img src="logoAlfa.png" class="rounded-md mb-4 h-[200px] object-contain" alt="Card 1">
@@ -25,7 +24,10 @@
                     nam delectus repudiandae provident magnam necessitatibus. Molestiae.</p>
                 <p class="mt-3">Data: 20/30/2024</p>
 
-                <button class="btn btn-neutral mt-5">Se Cadastrar</button>
+               <form action="inscrever" method="post">
+                    <input name="id_evento" value="<?=$evento["id"]?>" type="hidden">
+                    <button type="submit" class="btn btn-neutral mt-5">Se Cadastrar</button>
+               </form>
             </div>
             <?php endforeach;?>
 
