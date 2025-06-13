@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 
 public class TelaPrincipal extends JFrame implements GuiUtil {
     private JMenuBar menuBar;
+    private JPanel telaInicialPanel;
 
     public TelaPrincipal() {
 
@@ -17,7 +18,66 @@ public class TelaPrincipal extends JFrame implements GuiUtil {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
+
+        exibirTelaInicial();
+    }
+
+    private void exibirTelaInicial() {
+        telaInicialPanel = new JPanel(new GridBagLayout());
+        telaInicialPanel.setBackground(Color.white);
+
+        JLabel titulo = new JLabel("Bem-vindo ao Sistema Hackathon", SwingConstants.CENTER);
+        titulo.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        titulo.setForeground(new Color(33, 102, 153));
+        titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+
+        JButton btnEntrar = new JButton("Entrar no Sistema");
+        btnEntrar.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnEntrar.setFont(new Font("Arial", Font.PLAIN, 16));
+        btnEntrar.setBackground( new Color(33, 102, 153));
+        btnEntrar.setForeground(Color.WHITE);
+        btnEntrar.setOpaque(true);
+        btnEntrar.setContentAreaFilled(true);
+        btnEntrar.setBorderPainted(false);
+        btnEntrar.addActionListener(e -> iniciarSistema());
+
+        JButton btnSair = new JButton("Sair");
+        btnSair.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnSair.setFont(new Font("Arial", Font.PLAIN, 16));
+        btnSair.setBackground( new Color(237, 40, 57));
+        btnSair.setForeground(Color.WHITE);
+        btnSair.setOpaque(true);
+        btnSair.setContentAreaFilled(true);
+        btnSair.setBorderPainted(false);
+        btnSair.addActionListener(e -> System.exit(0));
+
+        btnEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent e) { btnEntrar.setBackground(new Color(21, 71, 107)); }
+            public void mouseExited(java.awt.event.MouseEvent e) { btnEntrar.setBackground(new Color(33, 102, 153)); }
+        });
+        btnSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent e) { btnSair.setBackground(new Color(180, 30, 40)); }
+            public void mouseExited(java.awt.event.MouseEvent e) { btnSair.setBackground(new Color(237, 40, 57)); }
+        });
+
+        ImageIcon imagem = new ImageIcon(getClass().getResource("/imagem/ilustracao_sistema.png"));
+        JLabel imagemLabel = new JLabel(imagem);
+
+
+
+       telaInicialPanel.add(titulo, montarGrid(0 , 0));
+        telaInicialPanel.add(btnEntrar, montarGrid(0 , 1));
+        telaInicialPanel.add(btnSair, montarGrid(0 , 2));
+        telaInicialPanel.add(imagemLabel, montarGrid(0, 3));
+        add(telaInicialPanel, BorderLayout.CENTER);
+    }
+
+    private void iniciarSistema() {
+        remove(telaInicialPanel);
         setJMenuBar(montarMenuBar());
+        revalidate();
+        repaint();
     }
 
     private JMenuBar montarMenuBar() {
