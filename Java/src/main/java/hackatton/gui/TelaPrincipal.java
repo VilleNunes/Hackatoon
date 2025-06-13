@@ -66,10 +66,11 @@ public class TelaPrincipal extends JFrame implements GuiUtil {
 
 
 
-       telaInicialPanel.add(titulo, montarGrid(0 , 0));
-        telaInicialPanel.add(btnEntrar, montarGrid(0 , 1));
-        telaInicialPanel.add(btnSair, montarGrid(0 , 2));
-        telaInicialPanel.add(imagemLabel, montarGrid(0, 3));
+        telaInicialPanel.add(titulo, montarGrid(0, 0, 1, 1));
+        telaInicialPanel.add(btnEntrar, montarGrid(0, 1, 1, 1));
+        telaInicialPanel.add(btnSair, montarGrid(0, 2, 1, 1));
+        telaInicialPanel.add(imagemLabel, montarGrid(0, 3, 1, 1));
+
         add(telaInicialPanel, BorderLayout.CENTER);
     }
 
