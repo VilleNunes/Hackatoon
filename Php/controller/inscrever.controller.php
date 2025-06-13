@@ -1,5 +1,6 @@
 <?php
     if(!auth()){
+      flash()->push("error","Para fazer a inscrição precisa se cadastrar no sistema");
       header("Location: login");
       die();
     }
