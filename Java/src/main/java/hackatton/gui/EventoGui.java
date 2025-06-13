@@ -1,8 +1,12 @@
 package hackatton.gui;
 
+import hackatton.dao.PalestranteDao;
+import hackatton.model.Curso;
 import hackatton.model.Evento;
+import hackatton.model.Palestrante;
 import hackatton.service.EventoService;
 
+import java.util.List;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
@@ -10,6 +14,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class EventoGui extends JFrame implements GuiUtil {
+
+    private JComboBox<String> cbPalestrante;
+    private JComboBox<String> cbCurso;
+
+    private final java.util.Map<String, Long> mapaNomeParaIdPalestrante = new java.util.HashMap<>();
+    private final java.util.Map<String, Long> mapaNomeParaIdCurso = new java.util.HashMap<>();
 
     private final EventoService eventoService;
     private Long eventoSelecionadoId = null;
@@ -40,6 +50,10 @@ public class EventoGui extends JFrame implements GuiUtil {
     private JButton btExcluir;
     private JButton btEditar;
 
+    private JLabel jlImagem;
+    private JTextField tfImagemPath;
+    private JButton btSelecionarImagem;
+
 
 
     private JTable tabela;
@@ -57,6 +71,30 @@ public class EventoGui extends JFrame implements GuiUtil {
         setLocationRelativeTo(null);
     }
 
+    private void selecionarImagem(ActionEvent e) {
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showOpenDialog(this);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            var fileSelecionado = fileChooser.getSelectedFile();
+            String nomeArquivo = System.currentTimeMillis() + "_" + fileSelecionado.getName();
+            String destino = "imagens/" + nomeArquivo;
+
+            try {
+                java.nio.file.Files.createDirectories(java.nio.file.Paths.get("imagens"));
+                java.nio.file.Files.copy(
+                        fileSelecionado.toPath(),
+                        java.nio.file.Paths.get(destino),
+                        java.nio.file.StandardCopyOption.REPLACE_EXISTING
+                );
+                tfImagemPath.setText(nomeArquivo); // só o nome, não o caminho completo
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Erro ao salvar imagem.");
+            }
+        }
+    }
+
     private JPanel montarPainelEntrada() {
         var jPanel = new JPanel(new GridBagLayout());
 
@@ -68,10 +106,15 @@ public class EventoGui extends JFrame implements GuiUtil {
         tfDataInicio = new JTextField(20);
         jlDataFim = new JLabel("Data Fim:");
         tfDataFim = new JTextField(20);
-        jlIdPalestrante = new JLabel("ID Palestrante:");
-        tfIdPalestrante = new JTextField(20);
-        jlIdCurso = new JLabel("ID Curso:");
-        tfIdCurso = new JTextField(20);
+        jlIdPalestrante = new JLabel("Palestrante:");
+        jlIdCurso = new JLabel("Curso:");
+
+        cbPalestrante = new JComboBox<>();
+        cbCurso = new JComboBox<>();
+
+        carregarPalestrantes();
+        carregarCursos();
+
         jlLocalizacao = new JLabel("Localização:");
         tfLocalizacao = new JTextField(20);
 
@@ -87,8 +130,6 @@ public class EventoGui extends JFrame implements GuiUtil {
         btEditar = new JButton("Editar");
         btEditar.addActionListener(this::editarEvento);
 
-
-
         jPanel.add(jlTitulo, montarGrid(0, 1));
         jPanel.add(tfTitulo, montarGrid(1, 1));
         jPanel.add(jlDescricao, montarGrid(0, 2));
@@ -98,15 +139,26 @@ public class EventoGui extends JFrame implements GuiUtil {
         jPanel.add(jlDataFim, montarGrid(0, 4));
         jPanel.add(tfDataFim, montarGrid(1, 4));
         jPanel.add(jlIdPalestrante, montarGrid(0, 5));
-        jPanel.add(tfIdPalestrante, montarGrid(1, 5));
+        jPanel.add(cbPalestrante, montarGrid(1, 5));
         jPanel.add(jlIdCurso, montarGrid(0, 6));
-        jPanel.add(tfIdCurso, montarGrid(1, 6));
+        jPanel.add(cbCurso, montarGrid(1, 6));
         jPanel.add(jlLocalizacao, montarGrid(0, 7));
         jPanel.add(tfLocalizacao, montarGrid(1, 7));
         jPanel.add(btSalvar, montarGrid(0, 8));
         jPanel.add(btListar, montarGrid(1, 8));
         jPanel.add(btExcluir, montarGrid(2, 8));
         jPanel.add(btEditar, montarGrid(3, 8));
+
+        jlImagem = new JLabel("Imagem:");
+        tfImagemPath = new JTextField(20);
+        tfImagemPath.setEditable(false);
+
+        btSelecionarImagem = new JButton("Selecionar Imagem");
+        btSelecionarImagem.addActionListener(this::selecionarImagem);
+
+        jPanel.add(jlImagem, montarGrid(0, 9));
+        jPanel.add(tfImagemPath, montarGrid(1, 9));
+        jPanel.add(btSelecionarImagem, montarGrid(2, 9));
 
         return jPanel;
     }
@@ -155,7 +207,8 @@ public class EventoGui extends JFrame implements GuiUtil {
                 tfDataFim.getText(),
                 Long.valueOf(tfIdPalestrante.getText()),
                 Long.valueOf(tfIdCurso.getText()),
-                tfLocalizacao.getText()
+                tfLocalizacao.getText(),
+                tfImagemPath.getText()
         );
 
         boolean sucesso = eventoService.atualizarBD(evento);
@@ -179,9 +232,18 @@ public class EventoGui extends JFrame implements GuiUtil {
             tfDescricao.setText((String) tabela.getValueAt(selectedRow, 2));
             tfDataInicio.setText((String) tabela.getValueAt(selectedRow, 3));
             tfDataFim.setText((String) tabela.getValueAt(selectedRow, 4));
-            tfIdPalestrante.setText(tabela.getValueAt(selectedRow, 5).toString());
-            tfIdCurso.setText(tabela.getValueAt(selectedRow, 6).toString());
             tfLocalizacao.setText((String) tabela.getValueAt(selectedRow, 7));
+
+            Long idPalestrante = (Long) tabela.getValueAt(selectedRow, 5);
+            Long idCurso = (Long) tabela.getValueAt(selectedRow, 6);
+
+            mapaNomeParaIdPalestrante.forEach((nome, id) -> {
+                if (id.equals(idPalestrante)) cbPalestrante.setSelectedItem(nome);
+            });
+
+            mapaNomeParaIdCurso.forEach((nome, id) -> {
+                if (id.equals(idCurso)) cbCurso.setSelectedItem(nome);
+            });
         }
     }
 
@@ -217,23 +279,27 @@ public class EventoGui extends JFrame implements GuiUtil {
     }
 
     private void salvarEvento(ActionEvent e) {
+        Long idPalestrante = mapaNomeParaIdPalestrante.get((String) cbPalestrante.getSelectedItem());
+        Long idCurso = mapaNomeParaIdCurso.get((String) cbCurso.getSelectedItem());
+
         Evento evento = new Evento(
                 eventoSelecionadoId,
                 tfTitulo.getText(),
                 tfDescricao.getText(),
                 tfDataInicio.getText(),
                 tfDataFim.getText(),
-                Long.valueOf(tfIdPalestrante.getText()),
-                Long.valueOf(tfIdCurso.getText()),
-                tfLocalizacao.getText()
+                idPalestrante,
+                idCurso,
+                tfLocalizacao.getText(),
+                tfImagemPath.getText()
         );
 
         boolean sucesso;
 
         if (eventoSelecionadoId == null) {
-            sucesso = eventoService.salvarBD(evento); // novo
+            sucesso = eventoService.salvarBD(evento);
         } else {
-            sucesso = eventoService.atualizarBD(evento); // edição
+            sucesso = eventoService.atualizarBD(evento);
         }
 
         if (sucesso) {
@@ -251,9 +317,32 @@ public class EventoGui extends JFrame implements GuiUtil {
         tfDescricao.setText("");
         tfDataInicio.setText("");
         tfDataFim.setText("");
-        tfIdPalestrante.setText("");
-        tfIdCurso.setText("");
         tfLocalizacao.setText("");
+        tfImagemPath.setText("");
+        cbPalestrante.setSelectedIndex(0);
+        cbCurso.setSelectedIndex(0);
+    }
+
+    private void carregarPalestrantes() {
+        mapaNomeParaIdPalestrante.clear();
+        cbPalestrante.removeAllItems();
+
+        List<Palestrante> lista = (List<Palestrante>) eventoService.listarPalestrantes();
+        for (Palestrante p : lista) {
+            mapaNomeParaIdPalestrante.put(p.getNome(), p.getId());
+            cbPalestrante.addItem(p.getNome());
+        }
+    }
+
+    private void carregarCursos() {
+        mapaNomeParaIdCurso.clear();
+        cbCurso.removeAllItems();
+
+        List<Curso> lista = (List<Curso>) eventoService.listarCursos();
+        for (Curso c : lista) {
+            mapaNomeParaIdCurso.put(c.getNome(), c.getId());
+            cbCurso.addItem(c.getNome());
+        }
     }
 
 }

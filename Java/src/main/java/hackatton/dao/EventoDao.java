@@ -12,7 +12,7 @@ public class EventoDao extends Dao implements DaoInterface {
         try {
             var evento = (Evento) entity;
 
-            String sqlInsert = "INSERT INTO evento(titulo, descricao, data_inicio, data_fim, id_palestrante, id_curso, localizacao) VALUES (?,?,?,?,?,?,?)";
+            String sqlInsert = "INSERT INTO evento(titulo, descricao, data_inicio, data_fim, id_palestrante, id_curso, localizacao, imagem) VALUES (?,?,?,?,?,?,?,?)";
 
             var ps = getConnection().prepareStatement(sqlInsert);
             ps.setString(1, evento.getTitulo());
@@ -23,11 +23,18 @@ public class EventoDao extends Dao implements DaoInterface {
             ps.setLong(6, evento.getIdCurso());
             ps.setString(7, evento.getLocalizacao());
 
-            ps.execute();
+
+            String caminhoImagem = "Imagens/" + evento.getNomeImagem();
+            ps.setString(8, caminhoImagem);
+
+            ps.executeUpdate();
+            ps.close();
+
             return true;
 
         } catch (Exception e) {
             System.out.println("Erro ao salvar evento: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
@@ -37,7 +44,7 @@ public class EventoDao extends Dao implements DaoInterface {
         try {
             var evento = (Evento) entity;
 
-            String sqlUpdate = "UPDATE evento SET titulo=?, descricao=?, data_inicio=?, data_fim=?, id_palestrante=?, id_curso=?, localizacao=? WHERE id=?";
+            String sqlUpdate = "UPDATE evento SET titulo=?, descricao=?, data_inicio=?, data_fim=?, id_palestrante=?, id_curso=?, localizacao=?, imagem=? WHERE id=?";
 
             var ps = getConnection().prepareStatement(sqlUpdate);
             ps.setString(1, evento.getTitulo());
@@ -47,13 +54,16 @@ public class EventoDao extends Dao implements DaoInterface {
             ps.setLong(5, evento.getIdPalestrante());
             ps.setLong(6, evento.getIdCurso());
             ps.setString(7, evento.getLocalizacao());
-            ps.setLong(8, evento.getId());
+            ps.setString(8, "Imagens/" + evento.getNomeImagem());
+            ps.setLong(9, evento.getId());
 
-            ps.execute();
+            ps.executeUpdate();
+            ps.close();
             return true;
 
         } catch (Exception e) {
             System.out.println("Erro ao atualizar evento: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
@@ -76,7 +86,9 @@ public class EventoDao extends Dao implements DaoInterface {
                         resultSet.getString("data_fim"),
                         resultSet.getLong("id_palestrante"),
                         resultSet.getLong("id_curso"),
-                        resultSet.getString("localizacao")
+                        resultSet.getString("localizacao"),
+                        resultSet.getString("imagem")
+
                 );
                 eventos.add(evento);
             }
