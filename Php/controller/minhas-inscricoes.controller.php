@@ -3,6 +3,11 @@
 if(!auth()){
    header("Location: index");
 }
+if(auth()['role'] == "admin"){
+    header("Location: admin");
+    die();
+}
+
 $api = new SimpleApiClient('http://localhost:3333');
 $api->setToken(token());
 $nome = isset($_GET['query']) ? $_GET['query'] : null;
