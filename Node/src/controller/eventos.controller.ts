@@ -42,16 +42,20 @@ export class EventsController {
 
     async eventoNotValidad(req: Request, res: Response, next: NextFunction) {
         try {
-            const { nome } = req.query;
+            const {nome} = req.query;
 
-            const eventosDisponiveis = await knex("eventos")
+            let query = knex("eventos")
             .whereNotIn("id", function() {
                 this.select("evento_id")
                 .from("inscricao")
-                .where("user_id", req.user?.id_user)
-                .where("nome", "like", `%${nome}%`);
+                .where("user_id", req.user?.id_user);
             })
-            .select("*");
+
+            if (nome && typeof nome === "string") {
+                query = query.andWhere("nome", "like", `%${nome}%`);
+            }
+
+            const eventosDisponiveis = await query;
 
             res.json(eventosDisponiveis);
             return;
