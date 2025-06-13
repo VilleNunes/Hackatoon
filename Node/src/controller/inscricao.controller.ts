@@ -60,19 +60,15 @@ export class InscricaoController {
                 const inscricoesPendentes = await knex("inscricao")
                     .join("users", "inscricao.user_id", "=", "users.id")
                     .join("eventos", "inscricao.evento_id", "=", "eventos.id")
-                    .whereNull("inscricao.validado")
                     .select(
                         "inscricao.id as inscricao_id",
-                        "users.id as user_id",
+                        "inscricao.validado",
                         "users.nome as user_nome",
-                        "users.email as user_email",
-                        "eventos.id as evento_id",
-                        "eventos.nome as evento_nome",
-                        "eventos.descricao",
-                        "inscricao.validado"
-                    );
-
-                res.json(inscricoesPendentes);
+                        "users.email",
+                        "eventos.nome",
+                        "eventos.descricao"
+                    ).where("validado","=","0");
+                res.send(inscricoesPendentes);
                 return;
             }
         } catch (error) {

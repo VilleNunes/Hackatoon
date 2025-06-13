@@ -5,7 +5,11 @@ transform translate-x-0 transition-transform duration-300 ease-in-out z-30">
 </div>
 <nav class="flex-grow mt-4 flex flex-col space-y-2 px-4">
     <a href="index" class="py-2 px-3 rounded hover:bg-blue-100">Site</a>
-    <a href="dashboard" class="py-2 px-3 rounded hover:bg-blue-100">Eventos</a>
-    <a href="minhas-inscricoes" class="py-2 px-3 rounded hover:bg-blue-100">Minhas Inscrições</a>
+    <?php if(auth()['role'] == "admin"): ?>
+        <a href="admin" class="py-2 px-3 rounded hover:bg-blue-100">Inscrições</a>
+    <?php else: ?>
+        <a href="minhas-inscricoes" class="py-2 px-3 rounded hover:bg-blue-100">Minhas Inscrições</a>
+        <a href="dashboard" class="py-2 px-3 rounded hover:bg-blue-100">Eventos</a>
+    <?php endif; ?>
 </nav>
 </aside>

@@ -10,9 +10,9 @@ export class UsersController{
     async create(req:Request,res:Response,next:NextFunction){
         try {
             const schemaBody = z.object({
-                nome: z.string(),
-                email: z.string().email(),
-                senha: z.string()
+                nome: z.string().min(3,{message:"O nome precisa ter mais de 3 caracteres"}),
+                email: z.string().email({message:"Email inválido"}),
+                senha: z.string().min(5,{message:"A senha precisa ter mais de 8 caracteres"})
             })
 
             const {nome,email,senha} = schemaBody.parse(req.body);
@@ -21,7 +21,6 @@ export class UsersController{
 
             if(user){
                 throw new AppError("Email já está sendo utilizado",409);
-                
             }
             
             const senha_hash = await hash(senha,8);
