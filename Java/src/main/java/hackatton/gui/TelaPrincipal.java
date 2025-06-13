@@ -83,6 +83,7 @@ public class TelaPrincipal extends JFrame implements GuiUtil {
 
         miEvento.addActionListener(this::abrirEventoGui);
         miCurso.addActionListener(this::abrirCursoGui);
+        miPalestrante.addActionListener(this::abrirPalestranteGui);
 
         return menuCad;
     }
@@ -126,6 +127,11 @@ public class TelaPrincipal extends JFrame implements GuiUtil {
 
     private void abrirCursoGui(ActionEvent actionEvent) {
         var gui = new CursoGui(new CursoService());
+        gui.setVisible(true);
+    }
+
+    private void abrirPalestranteGui(ActionEvent actionEvent) {
+        var gui = new PalestranteGui();
         gui.setVisible(true);
     }
 }

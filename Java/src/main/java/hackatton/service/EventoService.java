@@ -1,8 +1,11 @@
 package hackatton.service;
 
-import hackatton.dao.DaoInterface;
+import hackatton.dao.CursoDao;
 import hackatton.dao.EventoDao;
+import hackatton.dao.PalestranteDao;
+import hackatton.model.Curso;
 import hackatton.model.Evento;
+import hackatton.model.Palestrante;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -28,26 +31,21 @@ public class EventoService {
         return dao.atualizar(evento);
     }
 
-
     public Boolean deletarEvento(Long id) {
         if (id == null) return false;
         var dao = new EventoDao();
         return dao.deletar(id);
     }
 
-
-
-
     public String listar() {
-
         var dao = new EventoDao();
 
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (Object evento : dao.listar()) {
-            result = result + "\n" + evento;
+            result.append("\n").append(evento);
         }
 
-        return result;
+        return result.toString();
     }
 
     private List<String> readerFile(String nomeArquivo) {
@@ -69,5 +67,52 @@ public class EventoService {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+
+    public List<Curso> listarCursos() {
+        CursoDao cursoDao = new CursoDao();
+        List<Curso> cursos = new ArrayList<>();
+        cursoDao.listar().forEach(obj -> cursos.add((Curso) obj));
+        return cursos;
+    }
+
+    public List<Palestrante> listarPalestrantes(){
+        PalestranteDao palestranteDao = new PalestranteDao();
+        List<Palestrante> palestrantes = new ArrayList<>();
+        palestranteDao.listar().forEach(obj -> palestrantes.add((Palestrante) obj));
+        return palestrantes;
+    }
+
+    public Long getIdCursoPorNome(String nome) {
+        return listarCursos().stream()
+                .filter(curso -> curso.getNome().equalsIgnoreCase(nome))
+                .map(Curso::getId)
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Long getIdPalestrantePorNome(String nome) {
+        return listarPalestrantes().stream()
+                .filter(palestrante -> palestrante.getNome().equalsIgnoreCase(nome))
+                .map(Palestrante::getId)
+                .findFirst()
+                .orElse(null);
+    }
+
+    public String getNomeCursoPorId(Long id) {
+        return listarCursos().stream()
+                .filter(curso -> curso.getId().equals(id))
+                .map(Curso::getNome)
+                .findFirst()
+                .orElse("");
+    }
+
+    public String getNomePalestrantePorId(Long id) {
+        return listarPalestrantes().stream()
+                .filter(palestrante -> palestrante.getId().equals(id))
+                .map(Palestrante::getNome)
+                .findFirst()
+                .orElse("");
     }
 }

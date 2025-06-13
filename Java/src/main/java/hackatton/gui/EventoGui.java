@@ -1,8 +1,12 @@
 package hackatton.gui;
 
+import hackatton.dao.PalestranteDao;
+import hackatton.model.Curso;
 import hackatton.model.Evento;
+import hackatton.model.Palestrante;
 import hackatton.service.EventoService;
 
+import java.util.List;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
@@ -10,6 +14,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class EventoGui extends JFrame implements GuiUtil {
+
+    private JComboBox<String> cbPalestrante;
+    private JComboBox<String> cbCurso;
+
+    private final java.util.Map<String, Long> mapaNomeParaIdPalestrante = new java.util.HashMap<>();
+    private final java.util.Map<String, Long> mapaNomeParaIdCurso = new java.util.HashMap<>();
 
     private final EventoService eventoService;
     private Long eventoSelecionadoId = null;
@@ -96,10 +106,15 @@ public class EventoGui extends JFrame implements GuiUtil {
         tfDataInicio = new JTextField(20);
         jlDataFim = new JLabel("Data Fim:");
         tfDataFim = new JTextField(20);
-        jlIdPalestrante = new JLabel("ID Palestrante:");
-        tfIdPalestrante = new JTextField(20);
-        jlIdCurso = new JLabel("ID Curso:");
-        tfIdCurso = new JTextField(20);
+        jlIdPalestrante = new JLabel("Palestrante:");
+        jlIdCurso = new JLabel("Curso:");
+
+        cbPalestrante = new JComboBox<>();
+        cbCurso = new JComboBox<>();
+
+        carregarPalestrantes();
+        carregarCursos();
+
         jlLocalizacao = new JLabel("Localização:");
         tfLocalizacao = new JTextField(20);
 
@@ -115,8 +130,6 @@ public class EventoGui extends JFrame implements GuiUtil {
         btEditar = new JButton("Editar");
         btEditar.addActionListener(this::editarEvento);
 
-
-
         jPanel.add(jlTitulo, montarGrid(0, 1));
         jPanel.add(tfTitulo, montarGrid(1, 1));
         jPanel.add(jlDescricao, montarGrid(0, 2));
@@ -126,9 +139,9 @@ public class EventoGui extends JFrame implements GuiUtil {
         jPanel.add(jlDataFim, montarGrid(0, 4));
         jPanel.add(tfDataFim, montarGrid(1, 4));
         jPanel.add(jlIdPalestrante, montarGrid(0, 5));
-        jPanel.add(tfIdPalestrante, montarGrid(1, 5));
+        jPanel.add(cbPalestrante, montarGrid(1, 5));
         jPanel.add(jlIdCurso, montarGrid(0, 6));
-        jPanel.add(tfIdCurso, montarGrid(1, 6));
+        jPanel.add(cbCurso, montarGrid(1, 6));
         jPanel.add(jlLocalizacao, montarGrid(0, 7));
         jPanel.add(tfLocalizacao, montarGrid(1, 7));
         jPanel.add(btSalvar, montarGrid(0, 8));
@@ -219,9 +232,18 @@ public class EventoGui extends JFrame implements GuiUtil {
             tfDescricao.setText((String) tabela.getValueAt(selectedRow, 2));
             tfDataInicio.setText((String) tabela.getValueAt(selectedRow, 3));
             tfDataFim.setText((String) tabela.getValueAt(selectedRow, 4));
-            tfIdPalestrante.setText(tabela.getValueAt(selectedRow, 5).toString());
-            tfIdCurso.setText(tabela.getValueAt(selectedRow, 6).toString());
             tfLocalizacao.setText((String) tabela.getValueAt(selectedRow, 7));
+
+            Long idPalestrante = (Long) tabela.getValueAt(selectedRow, 5);
+            Long idCurso = (Long) tabela.getValueAt(selectedRow, 6);
+
+            mapaNomeParaIdPalestrante.forEach((nome, id) -> {
+                if (id.equals(idPalestrante)) cbPalestrante.setSelectedItem(nome);
+            });
+
+            mapaNomeParaIdCurso.forEach((nome, id) -> {
+                if (id.equals(idCurso)) cbCurso.setSelectedItem(nome);
+            });
         }
     }
 
@@ -257,26 +279,27 @@ public class EventoGui extends JFrame implements GuiUtil {
     }
 
     private void salvarEvento(ActionEvent e) {
+        Long idPalestrante = mapaNomeParaIdPalestrante.get((String) cbPalestrante.getSelectedItem());
+        Long idCurso = mapaNomeParaIdCurso.get((String) cbCurso.getSelectedItem());
+
         Evento evento = new Evento(
                 eventoSelecionadoId,
                 tfTitulo.getText(),
                 tfDescricao.getText(),
                 tfDataInicio.getText(),
                 tfDataFim.getText(),
-                Long.valueOf(tfIdPalestrante.getText()),
-                Long.valueOf(tfIdCurso.getText()),
+                idPalestrante,
+                idCurso,
                 tfLocalizacao.getText(),
                 tfImagemPath.getText()
         );
 
-        evento.setNomeImagem(tfImagemPath.getText());
-
         boolean sucesso;
 
         if (eventoSelecionadoId == null) {
-            sucesso = eventoService.salvarBD(evento); // novo
+            sucesso = eventoService.salvarBD(evento);
         } else {
-            sucesso = eventoService.atualizarBD(evento); // edição
+            sucesso = eventoService.atualizarBD(evento);
         }
 
         if (sucesso) {
@@ -294,9 +317,32 @@ public class EventoGui extends JFrame implements GuiUtil {
         tfDescricao.setText("");
         tfDataInicio.setText("");
         tfDataFim.setText("");
-        tfIdPalestrante.setText("");
-        tfIdCurso.setText("");
         tfLocalizacao.setText("");
+        tfImagemPath.setText("");
+        cbPalestrante.setSelectedIndex(0);
+        cbCurso.setSelectedIndex(0);
+    }
+
+    private void carregarPalestrantes() {
+        mapaNomeParaIdPalestrante.clear();
+        cbPalestrante.removeAllItems();
+
+        List<Palestrante> lista = (List<Palestrante>) eventoService.listarPalestrantes();
+        for (Palestrante p : lista) {
+            mapaNomeParaIdPalestrante.put(p.getNome(), p.getId());
+            cbPalestrante.addItem(p.getNome());
+        }
+    }
+
+    private void carregarCursos() {
+        mapaNomeParaIdCurso.clear();
+        cbCurso.removeAllItems();
+
+        List<Curso> lista = (List<Curso>) eventoService.listarCursos();
+        for (Curso c : lista) {
+            mapaNomeParaIdCurso.put(c.getNome(), c.getId());
+            cbCurso.addItem(c.getNome());
+        }
     }
 
 }
