@@ -194,8 +194,31 @@ public class EventoGui extends JFrame implements GuiUtil {
         }
     }
     private void editarEvento(ActionEvent e) {
+
         if (eventoSelecionadoId == null) {
             JOptionPane.showMessageDialog(this, "Selecione um evento na tabela para editar.");
+            return;
+        }
+
+        if (tfTitulo.getText().isBlank() || tfDescricao.getText().isBlank() ||
+                tfDataInicio.getText().isBlank() || tfDataFim.getText().isBlank() ||
+                tfLocalizacao.getText().isBlank() || tfImagemPath.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos obrigatórios (incluindo imagem).", "Campos vazios", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (cbPalestrante.getSelectedItem() == null || cbCurso.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Selecione um curso e um palestrante.", "Seleção inválida", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String regexDataHora = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}";
+
+        if (!tfDataInicio.getText().matches(regexDataHora) || !tfDataFim.getText().matches(regexDataHora)) {
+            JOptionPane.showMessageDialog(this,
+                    "Formato de data inválido, \nUse: yyyy-MM-dd HH:mm:ss\nEx: 2025-06-13 14:00",
+                    "Data inválida",
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -309,6 +332,28 @@ public class EventoGui extends JFrame implements GuiUtil {
         } else {
             JOptionPane.showMessageDialog(this, "Erro ao salvar evento.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
+        if (tfTitulo.getText().isBlank() || tfDescricao.getText().isBlank() ||
+                tfDataInicio.getText().isBlank() || tfDataFim.getText().isBlank() ||
+                tfLocalizacao.getText().isBlank() || tfImagemPath.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos obrigatórios (incluindo imagem).", "Campos vazios", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (cbPalestrante.getSelectedItem() == null || cbCurso.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Selecione um curso e um palestrante.", "Seleção inválida", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String regexDataHora = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}";
+
+        if (!tfDataInicio.getText().matches(regexDataHora) || !tfDataFim.getText().matches(regexDataHora)) {
+            JOptionPane.showMessageDialog(this,
+                    "Formato de data inválido, \nUse: yyyy-MM-dd HH:mm:ss\nEx: 2025-06-13 14:00",
+                    "Data inválida",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
     }
 
     private void limparCampos() {
