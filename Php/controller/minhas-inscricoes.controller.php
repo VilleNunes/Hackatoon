@@ -8,7 +8,7 @@ $api->setToken(token());
 $nome = isset($_GET['query']) ? $_GET['query'] : null;
 
 
-$endpoint = '/meus-eventos';
+$endpoint = '/inscricao/user';
 if ($nome) {
     $endpoint .= '?nome='. $nome;
 }
@@ -19,4 +19,4 @@ if (is_array($response) && isset($response['status']) && $response['status'] ===
     $eventos = is_array($response['data']) ? $response['data'] : [];
 } 
 
-view("home","dashboard",["eventos" => $eventos]);
+view("minhasInscricoes","dashboard",["eventos" => $eventos]);

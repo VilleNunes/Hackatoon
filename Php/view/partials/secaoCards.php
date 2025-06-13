@@ -15,16 +15,15 @@
             <div class="snap-start bg-white hover:-translate-y-5 transition duration-500 shadow-md rounded-lg p-4">
                 <img src="logoAlfa.png" class="rounded-md mb-4 h-[200px] object-contain" alt="Card 1">
                 <h3 class="font-semibold text-lg"><?= $evento['nome'] ?></h3>
-                <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-                    veritatis fugit architecto sint pariatur quas nostrum delectus sit iste quis. Fuga quibusdam
-                    rerum
-                    nam delectus repudiandae provident magnam necessitatibus. Molestiae.</p>
+                <p class="text-sm text-gray-600"><?= $evento['descricao'] ?></p>
                 <p>Data: 20/30/2024</p>
                 <p>Localização: Rua 2</p>
-                <form action="inscrever" method="post">
-                    <input name="id_evento" value="<?=$evento["id"]?>" type="hidden">
-                    <button type="submit" class="btn btn-neutral mt-5">Se Cadastrar</button>
-                </form>
+                <?php if($controller == "dashboard" || $controller == "eventos"):?>
+                    <form action="inscrever" method="post">
+                        <input name="id_evento" value="<?=$evento["id"]?>" type="hidden">
+                        <button type="submit" class="btn btn-neutral mt-5">Se Cadastrar</button>
+                    </form>
+                <?php endif;?>
             </div>
         <?php endforeach; ?>
     <?php else: ?>

@@ -18,7 +18,7 @@
       header("Location:  dashboard");
       die();
     }
-
-    header("Location: dashboard");
+    flash()->push("sucess","Inscrição feita com sucesso");
+    header("Location: minhas-inscricoes");
     die();
 ?>
