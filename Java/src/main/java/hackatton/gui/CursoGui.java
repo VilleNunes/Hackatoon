@@ -54,12 +54,12 @@ public class CursoGui extends JFrame implements GuiUtil {
         btEditar = new JButton("Editar");
         btEditar.addActionListener(this::editarCurso);
 
-        jPanel.add(jlNome, montarGrid(0, 0));
-        jPanel.add(tfNome, montarGrid(1, 0));
-        jPanel.add(btSalvar, montarGrid(0, 1));
-        jPanel.add(btListar, montarGrid(1, 1));
-        jPanel.add(btExcluir, montarGrid(2, 1));
-        jPanel.add(btEditar, montarGrid(3, 1));
+        jPanel.add(jlNome, montarGrid(0, 0, 3, 1));
+        jPanel.add(tfNome, montarGrid(1, 0, 3, 1));
+        jPanel.add(btSalvar, montarGrid(0, 1, 3, 1));
+        jPanel.add(btListar, montarGrid(1, 1, 3, 1));
+        jPanel.add(btExcluir, montarGrid(2, 1, 3, 1));
+        jPanel.add(btEditar, montarGrid(3, 1, 3, 1));
 
         return jPanel;
     }
@@ -87,8 +87,6 @@ public class CursoGui extends JFrame implements GuiUtil {
             tfNome.setText((String) tabela.getValueAt(selectedRow, 1));
         }
     }
-
-
 
     private void salvarCurso(ActionEvent e) {
         var curso = new Curso(
@@ -161,8 +159,7 @@ public class CursoGui extends JFrame implements GuiUtil {
     }
 
 
-
-        private void limparCampos() {
+    private void limparCampos() {
         cursoSelecionadoId = null;
         tfNome.setText("");
     }
