@@ -10,7 +10,7 @@ public class InscricaoDao extends Dao {
         List<String[]> lista = new ArrayList<>();
         String sql = """
     SELECT u.nome AS nomeAluno, u.email AS emailAluno,
-           e.titulo AS nomeEvento, p.nome AS nomePalestrante
+    e.titulo AS nomeEvento, p.nome AS nomePalestrante
     FROM inscricao i
     JOIN users u ON u.id = i.user_id
     JOIN evento e ON e.id = i.evento_id

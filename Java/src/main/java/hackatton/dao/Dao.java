@@ -10,7 +10,7 @@ public class Dao {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             this.connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/eventos?useTimezone=true&serverTimezone=UTC",
+                    "jdbc:mysql://localhost:3306/hackthon?useTimezone=true&serverTimezone=UTC",
                     "root",
                     "");
 

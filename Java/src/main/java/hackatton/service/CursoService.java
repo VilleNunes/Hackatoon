@@ -1,11 +1,7 @@
 package hackatton.service;
 
 import hackatton.dao.CursoDao;
-import hackatton.dao.EventoDao;
 import hackatton.model.Curso;
-import hackatton.model.Evento;
-
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
