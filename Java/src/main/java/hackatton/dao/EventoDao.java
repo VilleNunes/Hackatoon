@@ -11,7 +11,6 @@ public class EventoDao extends Dao implements DaoInterface {
     public boolean salvar(Object entity) {
         try {
             var evento = (Evento) entity;
-
             String sqlInsert = "INSERT INTO evento(titulo, descricao, data_inicio, data_fim, id_palestrante, id_curso, localizacao, imagem) VALUES (?,?,?,?,?,?,?,?)";
 
             var ps = getConnection().prepareStatement(sqlInsert);
@@ -22,13 +21,9 @@ public class EventoDao extends Dao implements DaoInterface {
             ps.setLong(5, evento.getIdPalestrante());
             ps.setLong(6, evento.getIdCurso());
             ps.setString(7, evento.getLocalizacao());
+            ps.setString(8, evento.getNomeImagem());
 
 
-            String caminhoImagem = "Imagens/" + evento.getNomeImagem();
-            ps.setString(8, caminhoImagem);
-
-            ps.executeUpdate();
-            ps.close();
 
             return true;
 
@@ -44,6 +39,7 @@ public class EventoDao extends Dao implements DaoInterface {
         try {
             var evento = (Evento) entity;
 
+
             String sqlUpdate = "UPDATE evento SET titulo=?, descricao=?, data_inicio=?, data_fim=?, id_palestrante=?, id_curso=?, localizacao=?, imagem=? WHERE id=?";
 
             var ps = getConnection().prepareStatement(sqlUpdate);
@@ -54,7 +50,7 @@ public class EventoDao extends Dao implements DaoInterface {
             ps.setLong(5, evento.getIdPalestrante());
             ps.setLong(6, evento.getIdCurso());
             ps.setString(7, evento.getLocalizacao());
-            ps.setString(8, "Imagens/" + evento.getNomeImagem());
+            ps.setString(8, evento.getNomeImagem());
             ps.setLong(9, evento.getId());
 
             ps.executeUpdate();
@@ -78,6 +74,7 @@ public class EventoDao extends Dao implements DaoInterface {
                     .executeQuery();
 
             while (resultSet.next()) {
+
                 var evento = new Evento(
                         resultSet.getLong("id"),
                         resultSet.getString("titulo"),
@@ -88,8 +85,8 @@ public class EventoDao extends Dao implements DaoInterface {
                         resultSet.getLong("id_curso"),
                         resultSet.getString("localizacao"),
                         resultSet.getString("imagem")
-
                 );
+
                 eventos.add(evento);
             }
 
@@ -121,6 +118,7 @@ public class EventoDao extends Dao implements DaoInterface {
                 evento.setIdPalestrante(rs.getLong("id_palestrante"));
                 evento.setIdCurso(rs.getLong("id_curso"));
                 evento.setLocalizacao(rs.getString("localizacao"));
+                evento.setNomeImagem(rs.getString("imagem"));
             }
 
             rs.close();

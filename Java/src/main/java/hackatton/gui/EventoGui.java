@@ -274,6 +274,7 @@
                 mapaNomeParaIdCurso.forEach((nome, id) -> {
                     if (id.equals(idCurso)) cbCurso.setSelectedItem(nome);
                 });
+
             }
         }
 
@@ -287,6 +288,8 @@
             model.addColumn("ID Palestrante");
             model.addColumn("ID Curso");
             model.addColumn("Localização");
+            model.addColumn("Imagem");
+
 
             eventoService.listarBD().forEach(evento -> {
                 model.addRow(new Object[]{
@@ -297,7 +300,9 @@
                         evento.getDataFim(),
                         evento.getIdPalestrante(),
                         evento.getIdCurso(),
-                        evento.getLocalizacao()
+                        evento.getLocalizacao(),
+                        evento.getNomeImagem()
+
                 });
             });
 
