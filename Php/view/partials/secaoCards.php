@@ -28,7 +28,10 @@
                     <?php endif; ?>
 
                     <?php if (!empty($evento["validado"]) && $evento["validado"] == 1): ?>
-                        <button type="submit" class="btn btn-neutral mt-5">Emitir Certificado</button>
+                        <form method="post" action="gerar-certificado" target="_blank">
+                            <input name="evento" value="<?=$evento['nome']?>" type="hidden">
+                            <button type="submit" class="btn btn-neutral mt-5">Ver Certificado</button>
+                        </form>
                     <?php endif; ?>
 
                     <?php if (isset($evento["validado"]) && $evento["validado"] == 0 && $controller == "minhas-inscricoes"): ?>

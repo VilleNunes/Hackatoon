@@ -68,6 +68,7 @@ export class InscricaoController {
                     .select(
                         "inscricao.id",
                         "inscricao.validado",
+                        "inscricao.created_at",
                         "users.nome as user_nome",
                         "users.email",
                         "eventos.nome",

@@ -16,7 +16,7 @@
 <?php endif; ?>
 
 <?php if ($mensagem = flash()->get("sucess")): ?>
-  <div id="notificacao" class="fixed top-5 right-5 bg-blue-500 text-white px-4 py-5 rounded shadow-lg transition-opacity duration-500 z-50">
+  <div id="notificacao" class="fixed top-5 right-5 bg-green-600 text-white px-4 py-5 rounded shadow-lg transition-opacity duration-500 z-50">
     <?= $mensagem ?>
   </div>
 

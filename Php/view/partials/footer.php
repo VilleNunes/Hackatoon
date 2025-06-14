@@ -1,4 +1,4 @@
-<div class="bg-blue-600">
+<div class="bg-blue-700">
     <footer class="footer max-w-screen-lg m-auto flex-wrap   items-center md:flex-row text-base-content p-20 flex justify-between">
         <nav class="text-end">
             <h6 class="footer-title font-bold text-white">Links ùteis</h6>

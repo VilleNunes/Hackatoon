@@ -1,12 +1,12 @@
 <?php
     if(!auth()){
-      flash()->push("error","Para fazer a inscrição precisa se cadastrar no sistema");
+      flash()->push("error","Para se inscrever, você precisa estar conectado com sua conta.");
       header("Location: login");
       die();
     }
 
      if(auth()['role'] == "admin"){
-      flash()->push("error","Para fazer a inscrição precisa logar em uma conta users");
+      flash()->push("error","Para fazer uma inscrição, é necessário estar logado em uma conta de usuário.");
       header("Location: index");
       die();
     }

@@ -1,7 +1,7 @@
 <?php
 
   if(auth()){
-    header("Location: index");
+    header("Location: dashboard");
     die();
   }
 
@@ -23,6 +23,7 @@
 
     $_SESSION["token"] = $response["data"]["token"];
     $_SESSION["auth"] = $response["data"]["user"];
+    flash()->push('sucess',"Seja bem vindo");
     header("Location: dashboard");
     die();
   }
