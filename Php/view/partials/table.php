@@ -1,4 +1,4 @@
-<div class="overflow-y-auto h-[350px] bg-white mt-6">
+<div class="overflow-y-auto h-[310px] bg-white mt-6">
   <table class="table table-zebra">
     <!-- head -->
     <thead>

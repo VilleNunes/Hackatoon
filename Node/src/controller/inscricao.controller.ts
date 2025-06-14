@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { knex } from "../database/knex";
 import { AppError } from "../utils/AppError";
 import { z } from "zod";
+import { console } from "node:inspector";
 
 
 export class InscricaoController {
@@ -35,8 +36,8 @@ export class InscricaoController {
     }
     async index(req: Request, res: Response, next: NextFunction) {
         try {
-            const { nome } = req.query;
             if (req.user?.role === "user") {
+                const { nome } = req.query;
                 let query = knex("inscricao")
                     .join("eventos", "inscricao.evento_id", "=", "eventos.id")
                     .select(
@@ -57,7 +58,10 @@ export class InscricaoController {
             }
 
             if (req.user?.role == "admin") {
-                const inscricoesPendentes = await knex("inscricao")
+
+                const { evento, nome } = req.query;
+                console.log(evento)
+                let query = knex("inscricao")
                     .leftJoin("users", "inscricao.user_id", "users.id")
                     .leftJoin("eventos", "inscricao.evento_id", "eventos.id")
                     .select(
@@ -68,7 +72,17 @@ export class InscricaoController {
                         "eventos.nome",
                         "eventos.descricao"
                     )
-                    .where("inscricao.validado", 0)
+                    .where("inscricao.validado", 0);
+
+                if (evento) {
+                    query = query.andWhere("eventos.nome", "like", `%${evento}%`);
+                }
+
+                if (nome) {
+                    query = query.andWhere("users.nome", "like", `%${nome}%`);
+                }
+
+                const inscricoesPendentes = await query;
                 res.send(inscricoesPendentes);
                 return;
             }
@@ -80,14 +94,14 @@ export class InscricaoController {
     async validadInscricao(req: Request, res: Response, next: NextFunction) {
         try {
             const { id } = req.body;
-            console.log(id);
+
             const inscricao = await knex("inscricao").where("id", id).first();
 
             if (!inscricao) {
                 throw new AppError("Inscrição não encontrada", 404);
             }
 
-            await knex("inscricao").where("id",inscricao.id).update({
+            await knex("inscricao").where("id", inscricao.id).update({
                 validado: 1
             });
 
