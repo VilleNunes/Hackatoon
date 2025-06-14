@@ -1,9 +1,7 @@
 package hackatton;
 
 
-import hackatton.gui.EventoGui;
 import hackatton.gui.TelaPrincipal;
-import hackatton.service.EventoService;
 
 import javax.swing.*;
 

@@ -6,8 +6,6 @@ import hackatton.dao.PalestranteDao;
 import hackatton.model.Curso;
 import hackatton.model.Evento;
 import hackatton.model.Palestrante;
-
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
