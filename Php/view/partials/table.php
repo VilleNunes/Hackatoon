@@ -1,11 +1,12 @@
-<div class="overflow-y-auto h-[350px] bg-white mt-6">
-  <table class="table table-zebra">
-    <!-- head -->
+<div class="overflow-y-auto h-[310px] p-10 rounded-xl shadow-md bg-white mt-6">
+  <table class="table table-zebra ">
+
     <thead>
       <tr>
         <th>Nome</th>
         <th>Email</th>
         <th>Evento</th>
+        <th>Data da inscrição</th>
         <th>Ação</th>
       </tr>
     </thead>
@@ -15,7 +16,8 @@
                 <tr>
                     <td><?=$inscricao['user_nome']?></td>
                     <td><?=$inscricao['email']?></td>
-                    <td><?=$inscricao['nome']?></td>
+                    <td><?=$inscricao['title']?></td>
+                    <td><?=$inscricao['created_at']?></td>
                     <td>
                         <form action="validar" method="post">
                             <input name="id" value="<?=$inscricao['id']?>" type="hidden">

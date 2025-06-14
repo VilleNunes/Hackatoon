@@ -7,7 +7,7 @@
         </svg>
     </button>
 
-    <div class="text-lg font-semibold" >Olá, <?=auth()['nome']?></div>
+    <div class="text-lg hidden md:block font-semibold" >Olá, <?=auth()['nome']?></div>
     <a href="/logout" id="logout-btn" class="font-bold">
         Logout
     </a href="/logout">
@@ -36,7 +36,7 @@
     }
 
     function isMobile() {
-        return window.innerWidth < 768;
+        return window.innerWidth < 1000;
     }
 
     function initMenu() {

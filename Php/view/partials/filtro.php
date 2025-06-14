@@ -1,5 +1,5 @@
-<div class="bg-white mt-4 p-3">
-   <form class="flex items-center gap-3" action="admin">
+<div class="bg-white mt-2 p-5 shadow-md">
+   <form class="flex items-center gap-3 flex-wrap" action="admin">
         <p>Nome:</p>
         <input type="text" placeholder="Nome" name="nome" class="input" />
         <p>Evento:</p>

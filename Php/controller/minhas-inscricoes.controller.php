@@ -22,6 +22,10 @@ $response = $api->get($endpoint);
 
 if (is_array($response) && isset($response['status']) && $response['status'] === 'success' && $response['http_code'] === 200) {
     $eventos = is_array($response['data']) ? $response['data'] : [];
-} 
+}else{
+    $eventos = [];
+}
+
+
 
 view("minhasInscricoes","dashboard",["eventos" => $eventos]);

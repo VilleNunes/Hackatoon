@@ -8,13 +8,24 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>UniAlfa</title>
+    <style>
+        body{
+            height: 100vh;
+        }
+    </style>
 </head>
 
-<body class="h-screen flex items-center justify-center p-10 bg-blue-950/90">
+<body class="md:grid flex grid-cols-2 p-2">
     <?php require "view/partials/notificacao.php" ?>
-    <?php
-        require  "view/{$view}.php"
-    ?>
+    <div class=" md:block hidden  rounded-lg bg-[url('../../imagens/banner4.jpg')] bg-center bg-cover">
+        
+    </div>
+    <div class="flex items-center mx-auto">
+        <?php
+            require  "view/{$view}.php"
+        ?>
+    </div>
+  
 </body>
 
 </html>
