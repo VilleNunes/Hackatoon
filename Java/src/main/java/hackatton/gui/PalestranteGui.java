@@ -29,6 +29,7 @@ public class PalestranteGui extends JFrame implements GuiUtil {
     private JButton btListar;
     private JButton btExcluir;
     private JButton btEditar;
+    private JButton btLimpar;
 
     private JTable tabela;
 
@@ -86,6 +87,10 @@ public class PalestranteGui extends JFrame implements GuiUtil {
         btEditar = new JButton("Editar");
         btEditar.addActionListener(this::editarPalestrante);
         jPanel.add(btEditar, montarGrid(3, 3, 3, 1));
+
+        btLimpar = new JButton("Limpar Campos");
+        btLimpar.addActionListener(e -> limparCampos());
+        jPanel.add(btLimpar, montarGrid(4, 3, 3, 1));
 
         return jPanel;
     }
