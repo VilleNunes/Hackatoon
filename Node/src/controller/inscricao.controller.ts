@@ -56,7 +56,7 @@ export class InscricaoController {
                     .where("inscricao.user_id", req.user?.id_user);
 
                 if (nome && typeof nome === "string") {
-                    query = query.andWhere("evento.nome", "like", `%${nome}%`);
+                    query = query.andWhere("evento.titulo", "like", `%${nome}%`);
                 }
 
                 const eventosDoUsuario = await query;
@@ -84,7 +84,7 @@ export class InscricaoController {
                     .where("inscricao.validado", 0);
 
                 if (evento) {
-                    query = query.andWhere("evento.nome", "like", `%${evento}%`);
+                    query = query.andWhere("evento.titulo", "like", `%${evento}%`);
                 }
 
                 if (nome) {

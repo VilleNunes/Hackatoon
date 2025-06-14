@@ -10,7 +10,7 @@ export class EventsController {
             let query = knex("evento").select("*").orderBy("id", "desc");
 
             if (nome && typeof nome === "string") {
-                query = query.where("nome", "like", `%${nome}%`);
+                query = query.where("titulo", "like", `%${nome}%`);
             }
 
             const eventos = await query;
@@ -50,7 +50,7 @@ export class EventsController {
                 });
 
             if (nome && typeof nome === "string") {
-                query = query.andWhere("nome", "like", `%${nome}%`);
+                query = query.andWhere("titulo", "like", `%${nome}%`);
             }
 
             const eventosDisponiveis = await query;
