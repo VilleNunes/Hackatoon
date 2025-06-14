@@ -86,7 +86,7 @@
                             java.nio.file.Paths.get(destino),
                             java.nio.file.StandardCopyOption.REPLACE_EXISTING
                     );
-                    tfImagemPath.setText(nomeArquivo); // só o nome, não o caminho completo
+                    tfImagemPath.setText("imagens/" + nomeArquivo);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(this, "Erro ao salvar imagem.");

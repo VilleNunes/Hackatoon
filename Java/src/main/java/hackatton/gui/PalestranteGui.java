@@ -106,8 +106,6 @@ public class PalestranteGui extends JFrame implements GuiUtil {
         return jPanel;
     }
 
-
-
     private void selecionarImagem(ActionEvent e) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Selecionar Imagem do Palestrante");
@@ -150,7 +148,7 @@ public class PalestranteGui extends JFrame implements GuiUtil {
                 }
                 Path destino = dirImagens.resolve(imagemSelecionada.getName());
                 Files.copy(imagemSelecionada.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
-                nomeImagem = imagemSelecionada.getName();
+                nomeImagem = "imagens/" + imagemSelecionada.getName();
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao salvar a imagem: " + ex.getMessage(), "Erro de Imagem", JOptionPane.ERROR_MESSAGE);
             }
