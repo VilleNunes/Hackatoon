@@ -1,5 +1,5 @@
-<div class="bg-gray-300/80 py-">
-    <div class="w-full max-w-6xl mx-auto px-4 py-10 relative">
+<div class="bg-gray-300/80 py-30">
+    <div class="w-full max-w-6xl mx-auto px-4 relative">
         <h2 class="text-2xl font-bold mb-6 text-gray-800">
             Eventos
         </h2>
@@ -25,7 +25,7 @@
                 </h3>
 
                 <p class="text-base text-gray-700 mb-2">
-                    <?= $evento['descricao'] ?>
+                    Descrição: <?= $evento['descricao'] ?>
                 </p>
 
                 <p class="text-sm text-gray-600 mb-1">
@@ -37,7 +37,7 @@
                 </p>
 
                 <p class="text-sm text-gray-600 mb-2">
-                    <?= $evento['localizacao'] ?>
+                    Localização: <?= $evento['localizacao'] ?>
                 </p>
 
                 <form action="inscrever" method="post">

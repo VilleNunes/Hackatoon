@@ -1,4 +1,4 @@
- <div id="sobre" class="max-w-screen-xl mt-20 mx-auto p-10 grid grid-cols-1 md:grid-cols-2 items-center gap-10">
+ <div id="sobre" class="max-w-screen-xl my-30 mx-auto p-10 grid grid-cols-1 md:grid-cols-2 items-center gap-10">
     <!-- Texto -->
     <div class="opacity-0 translate-y-10 transition-all duration-700 ease-in-out" data-animate>
         <h1 class="text-3xl font-bold mb-5">Sobre a UniAlfa</h1>
