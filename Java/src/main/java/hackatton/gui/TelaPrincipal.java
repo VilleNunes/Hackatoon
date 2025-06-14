@@ -130,18 +130,15 @@ public class TelaPrincipal extends JFrame implements GuiUtil {
 
         var miEvento = new JMenuItem("Eventos");
         var miPalestrante = new JMenuItem("Palestrantes");
-        var miAluno = new JMenuItem("Alunos");
         var miCurso = new JMenuItem("Cursos");
 
         menuCad.add(miEvento);
         menuCad.add(miPalestrante);
-        menuCad.add(miAluno);
         menuCad.add(miCurso);
 
         menuCad.setFont(new Font("Arial", Font.PLAIN, 16));
         miEvento.setFont(new Font("Arial", Font.PLAIN, 14));
         miPalestrante.setFont(new Font("Arial", Font.PLAIN, 14));
-        miAluno.setFont(new Font("Arial", Font.PLAIN, 14));
         miCurso.setFont(new Font("Arial", Font.PLAIN, 14));
 
         miEvento.addActionListener(this::abrirEventoGui);
@@ -154,11 +151,13 @@ public class TelaPrincipal extends JFrame implements GuiUtil {
 
     private void exibirSobre(ActionEvent actionEvent) {
         JOptionPane.showMessageDialog(this, """
-                        Equipe Hackathon
-                        
-                sdflj lksflasd lskfjalsdf ee lkjj
-                sffsff fd fssdfwefdf ffeergd fdsd
-                sfe fdsfefg sdfesf fsesgdfggg sfd
+                                     Equipe Hackathon
+                
+                Este sistema foi desenvolvido durante um Hackathon com o objetivo
+                de facilitar o gerenciamento de palestrantes, eventos e alunos.
+                Através de uma interface simples e intuitiva, o backoffice permite
+                o cadastro completo de palestrantes, incluindo nome, mini currículo e foto.
+                Também permite o cadastro de Eventos que se relaciona com curso e palestrante.
                                 
                 """);
     }
@@ -166,10 +165,12 @@ public class TelaPrincipal extends JFrame implements GuiUtil {
     private void exibirEquipe(ActionEvent actionEvent) {
         JOptionPane.showMessageDialog(this, """
                   Equipe Hackathon
-                    Aluno Nome Sobrenome
-                    Aluno Nome Sobrenome
-                    Aluno Nome Sobrenome
-                    Aluno Nome Sobrenome 
+                  
+                    Ville Nunes
+                    Gabriel de Abreu
+                    Bruno Madeira
+                    Heitor Corrêa 
+                    
                 """);
     }
 
