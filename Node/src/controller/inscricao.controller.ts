@@ -41,7 +41,8 @@ export class InscricaoController {
                 let query = knex("inscricao")
                     .join("eventos", "inscricao.evento_id", "=", "eventos.id")
                     .select(
-                        "eventos.id",
+                        "inscricao.id as id",
+                        "eventos.id as eventos_id",
                         "eventos.nome",
                         "eventos.descricao",
                         "inscricao.validado"
@@ -105,6 +106,28 @@ export class InscricaoController {
                 validado: 1
             });
 
+            res.send();
+            return;
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async delete(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.body;
+
+            const inscricao = await knex('inscricao').where("id", id).first();
+            
+            if (!inscricao) {
+                throw new AppError("Inscrição não encontrada", 404);
+            }
+
+            if (!inscricao.validado == false) {
+                throw new AppError("Não foi possivel excluir essa inscrição");
+            }
+
+            await knex('inscricao').where(inscricao).delete();
             res.send();
             return;
         } catch (error) {

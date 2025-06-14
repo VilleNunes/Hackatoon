@@ -34,6 +34,17 @@ if (is_array($response) && isset($response['status']) && $response['status'] ===
     $inscricoes = [];
 }
 
-view("homeAdmin", "dashboard", ["inscricoes" => $inscricoes]);
+$api = new SimpleApiClient("http://localhost:3333");
+$api->setToken(token());
+$response = $api->get('/metricas');
+
+
+if (is_array($response) && isset($response['status']) && $response['status'] === 'success' && $response['http_code'] === 200) {
+    $metricas = is_array($response['data']) ? $response['data'] : [];
+} else {
+    $metricas = [];
+}
+
+view("homeAdmin", "dashboard", ["inscricoes" => $inscricoes,"metricas"=>$metricas]);
 
           

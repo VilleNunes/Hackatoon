@@ -9,7 +9,7 @@
 
 <p class="text-3xl text-center font-bold">Eventos e Palestras</p>
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-10 max-w-screen-xl mx-auto gap-10 mb-20">
+<div class="grid grid-cols-1 space-y-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 p-10 max-w-screen-xl mx-auto gap-5 mb-20">
     <?php if (!empty($eventos) && is_array($eventos)): ?>
         <?php foreach($eventos as $evento): ?>
             <div class="bg-white hover:-translate-y-5 transition duration-500 shadow-md rounded-lg">
@@ -32,7 +32,10 @@
                     <?php endif; ?>
 
                     <?php if (isset($evento["validado"]) && $evento["validado"] == 0 && $controller == "minhas-inscricoes"): ?>
-                        <button class="btn mt-5 bg-red-700 text-white">Deletar Inscrição</button>
+                       <form action="deletar-inscricao" method="post">
+                         <input name="id_inscricao" value="<?= $evento["id"] ?>" type="hidden">
+                         <button class="btn mt-5 bg-red-700 text-white">Deletar Inscrição</button>
+                       </form>
                     <?php endif; ?>
                 </div>
             </div>

@@ -1,6 +1,6 @@
-<div class="overflow-y-auto h-[310px] bg-white mt-6">
-  <table class="table table-zebra">
-    <!-- head -->
+<div class="overflow-y-auto h-[310px] p-10 rounded-xl shadow-md bg-white mt-6">
+  <table class="table table-zebra ">
+
     <thead>
       <tr>
         <th>Nome</th>
