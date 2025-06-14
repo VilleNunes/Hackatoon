@@ -18,9 +18,9 @@ $response = $api->get($endpoint);
 
 
 if (is_array($response) && isset($response['status']) && $response['status'] === 'success' && $response['http_code'] === 200) {
-    $eventos = is_array($response['data']) ? $response['data'] : [];
+   $inscricoes = is_array($response['data']) ? $response['data'] : [];
 } 
 
         
-view("homeAdmin","dashboard",["eventos"=>$eventos]);
+view("homeAdmin","dashboard",["inscricoes"=>$inscricoes]);
           
