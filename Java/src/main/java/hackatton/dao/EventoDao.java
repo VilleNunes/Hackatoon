@@ -23,7 +23,8 @@ public class EventoDao extends Dao implements DaoInterface {
             ps.setString(7, evento.getLocalizacao());
             ps.setString(8, evento.getNomeImagem());
 
-
+            ps.executeUpdate();
+            ps.close();
 
             return true;
 
