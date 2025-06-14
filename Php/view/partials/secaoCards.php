@@ -30,7 +30,7 @@
 
                     <?php if (!empty($evento["validado"]) && $evento["validado"] == 1): ?>
                         <form method="post" action="gerar-certificado" target="_blank">
-                            <input name="evento" value="<?=$evento['nome']?>" type="hidden">
+                            <input name="evento" value="<?=$evento['titulo']?>" type="hidden">
                             <button type="submit" class="btn btn-neutral mt-5">Ver Certificado</button>
                         </form>
                     <?php endif; ?>
