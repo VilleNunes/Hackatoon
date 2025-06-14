@@ -207,6 +207,28 @@
                 return;
             }
 
+            if (tfTitulo.getText().isBlank() || tfDescricao.getText().isBlank() ||
+                    tfDataInicio.getText().isBlank() || tfDataFim.getText().isBlank() ||
+                    tfLocalizacao.getText().isBlank() || tfImagemPath.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos obrigatórios (incluindo imagem).", "Campos vazios", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            if (cbPalestrante.getSelectedItem() == null || cbCurso.getSelectedItem() == null) {
+                JOptionPane.showMessageDialog(this, "Selecione um curso e um palestrante.", "Seleção inválida", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            String regexDataHora = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}";
+
+            if (!tfDataInicio.getText().matches(regexDataHora) || !tfDataFim.getText().matches(regexDataHora)) {
+                JOptionPane.showMessageDialog(this,
+                        "Formato de data inválido!\nUse: yyyy-MM-dd HH:mm\nEx: 2025-06-13 14:00",
+                        "Data inválida",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             Evento evento = new Evento(
                     eventoSelecionadoId,
                     tfTitulo.getText(),
@@ -252,6 +274,7 @@
                 mapaNomeParaIdCurso.forEach((nome, id) -> {
                     if (id.equals(idCurso)) cbCurso.setSelectedItem(nome);
                 });
+
             }
         }
 
@@ -265,6 +288,8 @@
             model.addColumn("ID Palestrante");
             model.addColumn("ID Curso");
             model.addColumn("Localização");
+            model.addColumn("Imagem");
+
 
             eventoService.listarBD().forEach(evento -> {
                 model.addRow(new Object[]{
@@ -275,7 +300,9 @@
                         evento.getDataFim(),
                         evento.getIdPalestrante(),
                         evento.getIdCurso(),
-                        evento.getLocalizacao()
+                        evento.getLocalizacao(),
+                        evento.getNomeImagem()
+
                 });
             });
 
@@ -289,6 +316,28 @@
         private void salvarEvento(ActionEvent e) {
             Long idPalestrante = mapaNomeParaIdPalestrante.get((String) cbPalestrante.getSelectedItem());
             Long idCurso = mapaNomeParaIdCurso.get((String) cbCurso.getSelectedItem());
+
+            if (tfTitulo.getText().isBlank() || tfDescricao.getText().isBlank() ||
+                    tfDataInicio.getText().isBlank() || tfDataFim.getText().isBlank() ||
+                    tfLocalizacao.getText().isBlank() || tfImagemPath.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos obrigatórios (incluindo imagem).", "Campos vazios", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            if (cbPalestrante.getSelectedItem() == null || cbCurso.getSelectedItem() == null) {
+                JOptionPane.showMessageDialog(this, "Selecione um curso e um palestrante.", "Seleção inválida", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            String regexDataHora = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}";
+
+            if (!tfDataInicio.getText().matches(regexDataHora) || !tfDataFim.getText().matches(regexDataHora)) {
+                JOptionPane.showMessageDialog(this,
+                        "Formato de data inválido!\nUse: yyyy-MM-dd HH:mm\nEx: 2025-06-13 14:00",
+                        "Data inválida",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
 
             Evento evento = new Evento(
                     eventoSelecionadoId,

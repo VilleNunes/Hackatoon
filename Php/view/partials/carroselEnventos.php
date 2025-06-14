@@ -16,7 +16,7 @@
            
             <?php foreach($eventos as $evento):?>
             <div class="snap-start min-w-[350px] bg-white shadow-md rounded-lg p-4">
-                <img src="logoAlfa.png" class="rounded-md mb-4 h-[200px] object-contain" alt="Card 1">
+                <img src="../../imagens/banner1.jpg" class="rounded-md mb-4 h-[200px] object-cover" alt="">
                 <h3 class="font-semibold text-lg">Titulo</h3>
                 <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
                     veritatis fugit architecto sint pariatur quas nostrum delectus sit iste quis. Fuga quibusdam

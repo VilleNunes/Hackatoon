@@ -24,4 +24,6 @@ if (is_array($response) && isset($response['status']) && $response['status'] ===
     $eventos = is_array($response['data']) ? $response['data'] : [];
 } 
 
+
+
 view("minhasInscricoes","dashboard",["eventos" => $eventos]);

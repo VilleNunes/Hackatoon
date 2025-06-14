@@ -89,11 +89,12 @@ public class CursoGui extends JFrame implements GuiUtil {
     }
 
     private void salvarCurso(ActionEvent e) {
-        var curso = new Curso(
-                cursoSelecionadoId,
-                tfNome.getText()
-        );
+        if (tfNome.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos obrigatórios", "Campos vazios", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
+        var curso = new Curso(cursoSelecionadoId, tfNome.getText());
         boolean sucesso = cursoService.salvar(curso);
 
         if (sucesso) {
@@ -120,6 +121,13 @@ public class CursoGui extends JFrame implements GuiUtil {
         }
     }
     private void editarCurso(ActionEvent e) {
+        if (tfNome.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos obrigatórios", "Campos vazios", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+
+
         if (cursoSelecionadoId == null) {
             JOptionPane.showMessageDialog(this, "Selecione um curso na tabela para editar.");
             return;

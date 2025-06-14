@@ -30,7 +30,7 @@ public class Evento {
     public Evento(long id, String titulo, String descricao, String dataInicio, String dataFim, long idPalestrante, long idCurso, String localizacao, Object o, String imagem) {
     }
 
-    // Getter e Setter para imagem
+
     public String getNomeImagem() {
         return imagem;
     }
@@ -39,7 +39,7 @@ public class Evento {
         this.imagem = imagem;
     }
 
-    // Getters e Setters existentes...
+
 
     public String getLocalizacao() {
         return localizacao;

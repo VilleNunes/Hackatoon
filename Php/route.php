@@ -8,7 +8,7 @@ if(!$controller){
 }
 
 if(!file_exists("controller/{$controller}.controller.php")){
-    echo("Not FOund");
+    require "./view/template/notFound.php";
     die();
 }
 
