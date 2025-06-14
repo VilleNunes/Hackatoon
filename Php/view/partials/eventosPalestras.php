@@ -1,5 +1,5 @@
 <div class="py-30">
-    <div class="max-w-screen-lg mx-auto p-5">
+    <div class="max-w-screen-lg mx-auto py-15">
         <p class="text-3xl text-center font-bold  mb-10">Eventos e Palestras Unialfa</p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="bg-blue-600/80 p-5 rounded-xl hover:translate-y-5 duration-500  text-white/70">

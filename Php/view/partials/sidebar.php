@@ -1,6 +1,6 @@
 <?php $url = str_replace("/", "", $_SERVER['REQUEST_URI'])?>
 
-<aside id="sidebar" class="fixed border-r  inset-y-0 left-0 w-64 bg-white shadow-black/50 shadow-xl flex flex-col
+<aside id="sidebar" class="fixed inset-y-0 left-0 w-64 bg-white shadow-black/50 shadow-xl flex flex-col
 transform translate-x-0 transition-transform duration-300 ease-in-out z-30">
     <div class="p-6 text-xl font-bold mx-auto border-b">
         <img src="../imagens/logoAlfa.png" alt="Logo Alfa" class="h-10 w-auto">
