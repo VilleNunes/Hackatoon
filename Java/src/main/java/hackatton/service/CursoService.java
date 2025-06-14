@@ -48,12 +48,4 @@ public class CursoService {
         return dao.atualizar(curso);
     }
 
-    private void escreverArquivo(String conteudo, String nomeArquivo) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo, true))) {
-            writer.newLine();
-            writer.write(conteudo);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 }

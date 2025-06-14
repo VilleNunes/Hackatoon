@@ -47,7 +47,6 @@ public class EventoService {
 
         return result.toString();
     }
-
     private List<String> readerFile(String nomeArquivo) {
         List<String> result = new ArrayList<>();
 
@@ -58,15 +57,6 @@ public class EventoService {
         }
 
         return result;
-    }
-
-    private void writerFile(String conteudo, String nomeArquivo) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo, true))) {
-            writer.newLine();
-            writer.write(conteudo);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
     }
 
 
@@ -115,4 +105,12 @@ public class EventoService {
                 .findFirst()
                 .orElse("");
     }
+    public List<Evento> listarEventos() {
+        EventoDao eventoDao = new EventoDao();
+        List<Evento> eventos = new ArrayList<>();
+        eventoDao.listar().forEach(obj -> eventos.add((Evento) obj));
+        return eventos;
+    }
+
+
 }
