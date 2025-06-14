@@ -19,4 +19,5 @@ routes.use(authToken);
 routes.get("/meus-eventos",eventosController.eventoNotValidad);
 routes.post("/inscricao",inscricaoController.create);
 routes.get("/inscricao/user",inscricaoController.index);
+routes.post("/validar",inscricaoController.validadInscricao);
 export {routes}

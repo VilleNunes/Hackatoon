@@ -24,6 +24,9 @@
                         <button type="submit" class="btn btn-neutral mt-5">Se Cadastrar</button>
                     </form>
                 <?php endif;?>
+                <?php if(!empty($evento["validado"]) && $evento["validado"] == 1):?>
+                    <button type="submit" class="btn btn-neutral mt-5">Emitir Certificado</button>
+                <?php endif;?>
             </div>
         <?php endforeach; ?>
     <?php else: ?>

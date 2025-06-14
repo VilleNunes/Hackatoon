@@ -58,19 +58,41 @@ export class InscricaoController {
 
             if (req.user?.role == "admin") {
                 const inscricoesPendentes = await knex("inscricao")
-                    .join("users", "inscricao.user_id", "=", "users.id")
-                    .join("eventos", "inscricao.evento_id", "=", "eventos.id")
+                    .leftJoin("users", "inscricao.user_id", "users.id")
+                    .leftJoin("eventos", "inscricao.evento_id", "eventos.id")
                     .select(
-                        "inscricao.id as inscricao_id",
+                        "inscricao.id",
                         "inscricao.validado",
                         "users.nome as user_nome",
                         "users.email",
                         "eventos.nome",
                         "eventos.descricao"
-                    ).where("validado","=","0");
+                    )
+                    .where("inscricao.validado", 0)
                 res.send(inscricoesPendentes);
                 return;
             }
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async validadInscricao(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.body;
+            console.log(id);
+            const inscricao = await knex("inscricao").where("id", id).first();
+
+            if (!inscricao) {
+                throw new AppError("Inscrição não encontrada", 404);
+            }
+
+            await knex("inscricao").where("id",inscricao.id).update({
+                validado: 1
+            });
+
+            res.send();
+            return;
         } catch (error) {
             next(error);
         }

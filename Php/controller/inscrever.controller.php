@@ -5,6 +5,12 @@
       die();
     }
 
+     if(auth()['role'] == "admin"){
+      flash()->push("error","Para fazer a inscrição precisa logar em uma conta users");
+      header("Location: index");
+      die();
+    }
+
     $id_evento = $_POST["id_evento"];
     $api = new SimpleApiClient('http://localhost:3333');
   
