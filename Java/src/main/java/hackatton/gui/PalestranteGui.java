@@ -29,6 +29,7 @@ public class PalestranteGui extends JFrame implements GuiUtil {
     private JButton btListar;
     private JButton btExcluir;
     private JButton btEditar;
+    private JButton btLimpar;
 
     private JTable tabela;
 
@@ -87,6 +88,10 @@ public class PalestranteGui extends JFrame implements GuiUtil {
         btEditar.addActionListener(this::editarPalestrante);
         jPanel.add(btEditar, montarGrid(3, 3, 3, 1));
 
+        btLimpar = new JButton("Limpar Campos");
+        btLimpar.addActionListener(e -> limparCampos());
+        jPanel.add(btLimpar, montarGrid(4, 3, 3, 1));
+
         return jPanel;
     }
 
@@ -105,8 +110,6 @@ public class PalestranteGui extends JFrame implements GuiUtil {
 
         return jPanel;
     }
-
-
 
     private void selecionarImagem(ActionEvent e) {
         JFileChooser fileChooser = new JFileChooser();
@@ -150,7 +153,7 @@ public class PalestranteGui extends JFrame implements GuiUtil {
                 }
                 Path destino = dirImagens.resolve(imagemSelecionada.getName());
                 Files.copy(imagemSelecionada.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
-                nomeImagem = imagemSelecionada.getName();
+                nomeImagem = "imagens/" + imagemSelecionada.getName();
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao salvar a imagem: " + ex.getMessage(), "Erro de Imagem", JOptionPane.ERROR_MESSAGE);
             }

@@ -48,6 +48,7 @@
         private JButton btListar;
         private JButton btExcluir;
         private JButton btEditar;
+        private JButton btLimpar;
 
         private JLabel jlImagem;
         private JTextField tfImagemPath;
@@ -86,7 +87,7 @@
                             java.nio.file.Paths.get(destino),
                             java.nio.file.StandardCopyOption.REPLACE_EXISTING
                     );
-                    tfImagemPath.setText(nomeArquivo); // só o nome, não o caminho completo
+                    tfImagemPath.setText("imagens/" + nomeArquivo);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(this, "Erro ao salvar imagem.");
@@ -129,6 +130,9 @@
             btEditar = new JButton("Editar");
             btEditar.addActionListener(this::editarEvento);
 
+            btLimpar = new JButton("Limpar Campos");
+            btLimpar.addActionListener(e -> limparCampos());
+
             jPanel.add(jlTitulo, montarGrid(0, 1, 3, 1));
             jPanel.add(tfTitulo, montarGrid(1, 1, 3, 1));
             jPanel.add(jlDescricao, montarGrid(0, 2, 3, 1));
@@ -147,6 +151,7 @@
             jPanel.add(btListar, montarGrid(1, 8, 3, 1));
             jPanel.add(btExcluir, montarGrid(2, 8, 3, 1));
             jPanel.add(btEditar, montarGrid(3, 8, 3, 1));
+            jPanel.add(btLimpar, montarGrid(3, 9, 3, 1));
 
             jlImagem = new JLabel("Imagem:");
             tfImagemPath = new JTextField(20);
