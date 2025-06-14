@@ -41,7 +41,7 @@ public class EventoDao extends Dao implements DaoInterface {
             var evento = (Evento) entity;
 
 
-            String sqlUpdate = "UPDATE evento SET titulo=?, descricao=?, data_inicio=?, data_fim=?, id_palestrante=?, id_curso=?, localizacao=?, imagem=? WHERE id=?";
+            String sqlUpdate = "    UPDATE evento SET titulo=?, descricao=?, data_inicio=?, data_fim=?, id_palestrante=?, id_curso=?, localizacao=?, imagem=? WHERE id=?";
 
             var ps = getConnection().prepareStatement(sqlUpdate);
             ps.setString(1, evento.getTitulo());
