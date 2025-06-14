@@ -112,17 +112,19 @@ public class TelaPrincipal extends JFrame implements GuiUtil {
         return menuConfig;
     }
 
-    private static JMenu montarMenuRel() {
+    private JMenu montarMenuRel() {
         var menuRel = new JMenu("Relatórios");
         var miRelAluno = new JMenuItem("Alunos por Evento");
+
         menuRel.add(miRelAluno);
+
+        miRelAluno.addActionListener(this::abrirInscricaoGui);
 
         menuRel.setFont(new Font("Arial",Font.PLAIN,16));
         miRelAluno.setFont(new Font("Arial",Font.PLAIN,14));
 
         return menuRel;
     }
-
     private JMenu montarMenuCad() {
         var menuCad = new JMenu("Cadastros");
 
@@ -193,6 +195,10 @@ public class TelaPrincipal extends JFrame implements GuiUtil {
 
     private void abrirPalestranteGui(ActionEvent actionEvent) {
         var gui = new PalestranteGui();
+        gui.setVisible(true);
+    }
+    private void abrirInscricaoGui(ActionEvent actionEvent) {
+        var gui = new InscricaoGui();
         gui.setVisible(true);
     }
 }

@@ -107,17 +107,9 @@ public class Evento {
 
     @Override
     public String toString() {
-        return "Evento{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", dataInicio='" + dataInicio + '\'' +
-                ", dataFim='" + dataFim + '\'' +
-                ", idPalestrante=" + idPalestrante +
-                ", idCurso=" + idCurso +
-                ", localizacao='" + localizacao + '\'' +
-                ", imagem='" + imagem + '\'' +
-                '}';
+        return this.titulo;
     }
+
+
 
 }
