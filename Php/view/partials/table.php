@@ -16,7 +16,7 @@
                 <tr>
                     <td><?=$inscricao['user_nome']?></td>
                     <td><?=$inscricao['email']?></td>
-                    <td><?=$inscricao['nome']?></td>
+                    <td><?=$inscricao['title']?></td>
                     <td><?=$inscricao['created_at']?></td>
                     <td>
                         <form action="validar" method="post">

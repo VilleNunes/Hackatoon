@@ -25,4 +25,9 @@
      return $_SESSION['token'];
     }
 
+    function formatarData(string $dataISO): string {
+        $date = new DateTime($dataISO);
+        return $date->format('d/m/Y') . ' às ' . $date->format('H:i');
+    }
+
 ?>

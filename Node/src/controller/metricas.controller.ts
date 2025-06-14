@@ -7,7 +7,7 @@ export class MetricasController {
         try {
             const totalUsuarios = await knex("users").count({ count: "*" });
             const totalInscricoes = await knex("inscricao").count({ count: "*" });
-            const totalEventos = await knex("eventos").count({ count: "*" });
+            const totalEventos = await knex("evento").count({ count: "*" });
 
             res.json({
                 totalUsuarios: totalUsuarios[0].count,

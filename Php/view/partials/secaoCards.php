@@ -15,10 +15,11 @@
             <div class="bg-white hover:-translate-y-5 transition duration-500 shadow-md rounded-lg">
                 <img src="../../imagens/banner1.jpg" class="rounded-md mx-auto mb-4 h-[200px] object-cover ">
                 <div class="p-5">
-                    <h3 class="font-semibold text-lg"><?= $evento['nome'] ?></h3>
+                    <h3 class="font-semibold text-lg"><?= $evento['titulo'] ?></h3>
                     <p class="text-sm text-gray-600"><?= $evento['descricao'] ?></p>
-                    <p>Data: 20/30/2024</p>
-                    <p>Localização: Rua 2</p>
+                    <p class="text-sm text-gray-600">Data de Início <?= formatarData($evento['data_inicio']) ?></p>
+                    <p class="text-sm text-gray-600">Até <?= formatarData($evento['data_fim']) ?></p>
+                    <p class="text-sm text-gray-600">Localização <?= $evento['localizacao'] ?></p>
 
                     <?php if ($controller == "dashboard" || $controller == "eventos"): ?>
                         <form action="inscrever" method="post">

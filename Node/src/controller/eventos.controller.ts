@@ -2,13 +2,12 @@ import { Request, Response, NextFunction } from "express";
 import { knex } from "../database/knex";
 import { AppError } from "../utils/AppError";
 
-
 export class EventsController {
     async index(req: Request, res: Response, next: NextFunction) {
         try {
             const { nome } = req.query;
 
-            let query = knex("eventos").select("*").orderBy("id", "desc");
+            let query = knex("evento").select("*").orderBy("id", "desc");
 
             if (nome && typeof nome === "string") {
                 query = query.where("nome", "like", `%${nome}%`);
@@ -24,16 +23,15 @@ export class EventsController {
 
     async show(req: Request, res: Response, next: NextFunction) {
         try {
+            const { id } = req.params;
 
-            const {id} = req.params;
+            const evento = await knex("evento").where({ id }).first();
 
-            const eventos = await knex("eventos").where({"id":id}).first();
-
-            if(!eventos){
-                throw new AppError("Esse evento não existe",404);
+            if (!evento) {
+                throw new AppError("Esse evento não existe", 404);
             }
 
-            res.json(eventos);
+            res.json(evento);
             return;
         } catch (error) {
             next(error);
@@ -42,14 +40,14 @@ export class EventsController {
 
     async eventoNotValidad(req: Request, res: Response, next: NextFunction) {
         try {
-            const {nome} = req.query;
+            const { nome } = req.query;
 
-            let query = knex("eventos")
-            .whereNotIn("id", function() {
-                this.select("evento_id")
-                .from("inscricao")
-                .where("user_id", req.user?.id_user);
-            })
+            let query = knex("evento")
+                .whereNotIn("id", function () {
+                    this.select("evento_id")
+                        .from("inscricao")
+                        .where("user_id", req.user?.id_user);
+                });
 
             if (nome && typeof nome === "string") {
                 query = query.andWhere("nome", "like", `%${nome}%`);
