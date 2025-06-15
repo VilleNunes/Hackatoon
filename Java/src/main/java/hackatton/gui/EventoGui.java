@@ -78,7 +78,7 @@
             if (result == JFileChooser.APPROVE_OPTION) {
                 var fileSelecionado = fileChooser.getSelectedFile();
                 String nomeArquivo = System.currentTimeMillis() + "_" + fileSelecionado.getName();
-                String destino = "imagens/" + nomeArquivo;
+                String destino = "../Php/imagens/" + nomeArquivo;
 
                 try {
                     java.nio.file.Files.createDirectories(java.nio.file.Paths.get("imagens"));

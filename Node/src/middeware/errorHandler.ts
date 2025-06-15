@@ -9,7 +9,7 @@ export function errorHandler(error:any,req: Request, res: Response, next: NextFu
 
   if(error instanceof ZodError){
     return res.status(500).json(
-    "validat error",
+      "Error de Validação nos campos"
     )
   }
 

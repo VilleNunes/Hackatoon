@@ -51,9 +51,11 @@ export class InscricaoController {
                         "evento.data_inicio",
                         "evento.data_fim",
                         "evento.localizacao",
-                        "inscricao.validado"
+                        "inscricao.validado",
+                        "evento.imagem",
+                        "inscricao.created_at"
                     )
-                    .where("inscricao.user_id", req.user?.id_user);
+                    .where("inscricao.user_id", req.user?.id_user).orderBy("created_at","desc");
 
                 if (nome && typeof nome === "string") {
                     query = query.andWhere("evento.titulo", "like", `%${nome}%`);
@@ -79,7 +81,8 @@ export class InscricaoController {
                         "users.nome as user_nome",
                         "users.email",
                         "evento.titulo",
-                        "evento.descricao"
+                        "evento.descricao",
+
                     )
                     .where("inscricao.validado", 0);
 

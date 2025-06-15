@@ -147,13 +147,13 @@ public class PalestranteGui extends JFrame implements GuiUtil {
 
         if (imagemSelecionada != null) {
             try {
-                Path dirImagens = Path.of("Imagens");
+                Path dirImagens = Path.of("../Php/imagens");
                 if (!Files.exists(dirImagens)) {
                     Files.createDirectories(dirImagens);
                 }
                 Path destino = dirImagens.resolve(imagemSelecionada.getName());
                 Files.copy(imagemSelecionada.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
-                nomeImagem = "imagens/" + imagemSelecionada.getName();
+                nomeImagem = "../../imagens/" + imagemSelecionada.getName();
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao salvar a imagem: " + ex.getMessage(), "Erro de Imagem", JOptionPane.ERROR_MESSAGE);
             }

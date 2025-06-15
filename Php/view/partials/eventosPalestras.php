@@ -1,4 +1,4 @@
-<div class="py-30">
+<div class="py-30 p-5">
     <div class="max-w-screen-lg mx-auto py-15">
         <p class="text-3xl text-center font-bold  mb-10">Eventos e Palestras Unialfa</p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">

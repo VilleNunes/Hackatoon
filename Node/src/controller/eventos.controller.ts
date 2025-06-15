@@ -25,7 +25,22 @@ export class EventsController {
         try {
             const { id } = req.params;
 
-            const evento = await knex("evento").where({ id }).first();
+            const evento = await knex("evento")
+            .join("curso","evento.id_curso","=","curso.id")
+            .join("palestrante","evento.id_palestrante","=","palestrante.id")
+            .select(
+                "evento.id",
+                "evento.titulo",
+                "evento.descricao",
+                "evento.data_inicio",
+                "evento.data_fim",
+                "evento.imagem",
+                "evento.localizacao",
+                "curso.nome",
+                "palestrante.nome as nome_palestrante",
+                "palestrante.minicurriculo",
+                "palestrante.foto"
+            ).where("evento.id",id).first();
 
             if (!evento) {
                 throw new AppError("Esse evento não existe", 404);

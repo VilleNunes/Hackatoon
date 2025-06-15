@@ -18,7 +18,7 @@
 
             <?php foreach($eventos as $evento): ?>
             <div class="snap-start min-w-[350px] max-w-[350px] bg-white shadow-md rounded-lg p-4">
-                <img src="../../imagens/banner1.jpg" class="rounded-md mb-4 h-[200px] object-cover" alt="">
+                <img src="../../<?=$evento['imagem']?>" class="rounded-md mb-4 h-[250px] w-full object-cover" alt="">
 
                 <h3 class="font-semibold text-xl text-gray-800 mb-1">
                     <?= $evento['titulo'] ?>
@@ -40,10 +40,10 @@
                     Localização: <?= $evento['localizacao'] ?>
                 </p>
 
-                <form action="inscrever" method="post">
+                <form action="ver-evento" method="post">
                     <input name="id_evento" value="<?= $evento["id"] ?>" type="hidden">
                     <button type="submit" class="btn btn-neutral mt-5">
-                        Se Cadastrar
+                        Saber Mais
                     </button>
                 </form>
             </div>
