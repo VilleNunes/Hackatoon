@@ -4,7 +4,7 @@ export default {
     host: "localhost",
     user: "root",
     password: "",
-    database: "eventos",
+    database: "unialfa",
     port: 3306,
   },
   pool: {

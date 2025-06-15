@@ -58,13 +58,13 @@ public class CursoGui extends JFrame implements GuiUtil {
         btLimpar = new JButton("Limpar Campos");
         btLimpar.addActionListener(e -> limparCampos());
 
-        jPanel.add(jlNome, montarGrid(0, 0, 3, 1));
+        jPanel.add(jlNome, montarGrid(0, 0, 4, 1));
         jPanel.add(tfNome, montarGrid(1, 0, 3, 1));
         jPanel.add(btSalvar, montarGrid(0, 1, 3, 1));
         jPanel.add(btListar, montarGrid(1, 1, 3, 1));
         jPanel.add(btExcluir, montarGrid(2, 1, 3, 1));
         jPanel.add(btEditar, montarGrid(3, 1, 3, 1));
-        jPanel.add(btLimpar, montarGrid(4, 1, 3, 1));
+        jPanel.add(btLimpar, montarGrid(2, 0, 3, 1));
 
         return jPanel;
     }

@@ -1,9 +1,3 @@
-CREATE TABLE
-  `curso` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `nome` varchar(100) NOT NULL,
-    PRIMARY KEY (`id`)
- ) ENGINE = InnoDB AUTO_INCREMENT = 5 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci
 
  CREATE TABLE
   `evento` (
@@ -21,7 +15,7 @@ CREATE TABLE
     KEY `id_curso` (`id_curso`),
     CONSTRAINT `evento_ibfk_1` FOREIGN KEY (`id_palestrante`) REFERENCES `palestrante` (`id`),
     CONSTRAINT `evento_ibfk_2` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 166 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci
+) ENGINE = InnoDB AUTO_INCREMENT = 166 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 CREATE TABLE
   `palestrante` (
@@ -30,4 +24,11 @@ CREATE TABLE
     `minicurriculo` text NOT NULL,
     `foto` varchar(255) DEFAULT NULL,
     PRIMARY KEY (`id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 12 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci
+) ENGINE = InnoDB AUTO_INCREMENT = 12 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+CREATE TABLE
+  `curso` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `nome` varchar(100) NOT NULL,
+    PRIMARY KEY (`id`)
+ ) ENGINE = InnoDB AUTO_INCREMENT = 5 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
