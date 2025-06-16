@@ -6,7 +6,6 @@
         <th>Nome</th>
         <th>Email</th>
         <th>Evento</th>
-        <th>Data da inscrição</th>
         <th>Ação</th>
       </tr>
     </thead>
@@ -17,7 +16,6 @@
                     <td><?=$inscricao['user_nome']?></td>
                     <td><?=$inscricao['email']?></td>
                     <td><?=$inscricao['titulo']?></td>
-                    <td><?=formatarData($inscricao['created_at'])?></td>
                     <td>
                         <form action="validar" method="post">
                             <input name="id" value="<?=$inscricao['id']?>" type="hidden">
