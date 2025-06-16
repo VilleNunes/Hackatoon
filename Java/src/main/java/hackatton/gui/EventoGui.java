@@ -63,7 +63,7 @@
 
             setTitle("Cadastro de Evento");
             setSize(700, 500);
-            setDefaultCloseOperation(EXIT_ON_CLOSE);
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
             getContentPane().add(montarPainelEntrada(), BorderLayout.NORTH);
             getContentPane().add(montarPainelSaida(), BorderLayout.CENTER);
