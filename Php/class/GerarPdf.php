@@ -58,7 +58,7 @@ $pdf->Cell($larguraLinha, 0, '', 'T');
 
 
 $pdf->SetXY($posicaoX, $posicaoY + 5);
-$pdf->Cell($larguraLinha, 10, utf8_decode("Rafael da Silva"), 0, 0, 'C');
+$pdf->Cell($larguraLinha, 10, utf8_decode("Rafael Moretto Barros"), 0, 0, 'C');
 
 
         $pdf->Output('I', $nomeArquivo);
